@@ -1,0 +1,14 @@
+{
+  "mappings": {
+    "com/github/yimeng261/maidspell/mixin/EntityMaidMixin": {
+      "<init>(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/level/Level;)V": "Lcom/github/tartaricacid/touhoulittlemaid/entity/passive/EntityMaid;<init>(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/level/Level;)V"
+    }
+  },
+  "data": {
+    "searge": {
+      "com/github/yimeng261/maidspell/mixin/EntityMaidMixin": {
+        "<init>(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/level/Level;)V": "Lcom/github/tartaricacid/touhoulittlemaid/entity/passive/EntityMaid;<init>(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/level/Level;)V"
+      }
+    }
+  }
+}
