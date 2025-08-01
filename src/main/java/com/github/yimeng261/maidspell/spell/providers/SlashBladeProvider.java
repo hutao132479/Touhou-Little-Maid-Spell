@@ -1,8 +1,8 @@
-package com.github.yimeng261.maidspell.providers;
+package com.github.yimeng261.maidspell.spell.providers;
 
 import com.github.tartaricacid.touhoulittlemaid.entity.passive.EntityMaid;
 import com.github.yimeng261.maidspell.api.ISpellBookProvider;
-import com.github.yimeng261.maidspell.data.MaidSlashBladeData;
+import com.github.yimeng261.maidspell.spell.data.MaidSlashBladeData;
 
 import com.github.yimeng261.maidspell.spell.SimplifiedSpellCaster;
 import mods.flammpfeil.slashblade.registry.SlashArtsRegistry;

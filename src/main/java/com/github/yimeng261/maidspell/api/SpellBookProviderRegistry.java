@@ -1,6 +1,6 @@
 package com.github.yimeng261.maidspell.api;
 
-import com.github.yimeng261.maidspell.manager.SpellBookManager;
+import com.github.yimeng261.maidspell.spell.manager.SpellBookManager;
 import org.slf4j.Logger;
 import com.mojang.logging.LogUtils;
 
