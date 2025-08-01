@@ -23,7 +23,7 @@ public class SimplifiedSpellCaster {
     private final EntityMaid maid;
     private LivingEntity target;
     
-    public static double MELEE_RANGE = Config.meleeRange;
+    public static double MELEE_RANGE;
     private static final double MOVEMENT_SPEED = 0.6;
 
     private SpellBookManager spellBookManager;
@@ -31,7 +31,7 @@ public class SimplifiedSpellCaster {
     public SimplifiedSpellCaster(EntityMaid maid) {
         this.maid = maid;
         this.spellBookManager = SpellBookManager.getOrCreateManager(maid);
-        
+        LOGGER.debug("maidMeleeRange: {}", MELEE_RANGE);
     }
     
     /**

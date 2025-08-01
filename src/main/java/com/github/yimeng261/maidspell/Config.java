@@ -1,5 +1,7 @@
 package com.github.yimeng261.maidspell;
 
+import com.github.yimeng261.maidspell.spell.SimplifiedSpellCaster;
+import com.github.yimeng261.maidspell.task.SpellCombatTask;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -49,6 +51,11 @@ public class Config {
         maxSpellRange = MAX_SPELL_RANGE.get();
         meleeRange = MELEE_RANGE.get();
         spellDamageMultiplier = SPELL_DAMAGE_MULTIPLIER.get();
+
+        SpellCombatTask.setSpellRange((float) maxSpellRange);
+        SimplifiedSpellCaster.MELEE_RANGE= (float) meleeRange;
+
+
 
         Global.common_damageProcessors.add((hurtEvent,maid)->{
             hurtEvent.setAmount((float) (hurtEvent.getAmount()*spellDamageMultiplier));
