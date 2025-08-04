@@ -1,11 +1,17 @@
 package com.github.yimeng261.maidspell;
 
 import com.github.yimeng261.maidspell.spell.SimplifiedSpellCaster;
+import com.github.yimeng261.maidspell.spell.manager.SpellBookManager;
 import com.github.yimeng261.maidspell.task.SpellCombatTask;
+import com.mojang.logging.LogUtils;
+import io.redspace.ironsspellbooks.damage.ISSDamageTypes;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.common.ForgeConfigSpec;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
+import org.slf4j.Logger;
 
 /**
  * 女仆法术战斗系统配置类
@@ -13,6 +19,8 @@ import net.minecraftforge.fml.event.config.ModConfigEvent;
  */
 @Mod.EventBusSubscriber(modid = MaidSpellMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class Config {
+
+    private static final Logger LOGGER = LogUtils.getLogger();
     
     private static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
     
@@ -31,11 +39,14 @@ public class Config {
 
         
     private static final ForgeConfigSpec.DoubleValue SPELL_DAMAGE_MULTIPLIER = BUILDER
-        .comment("法术伤害倍数 (默认: 1.0)")
-        .comment("Spell damage multiplier")
-        .defineInRange("spellDamageMultiplier", 1.0, 0, 50.0);
-    
-    // AI相关配置
+        .comment("女仆伤害倍率 (默认: 1.0，仅在法术战斗任务下生效)")
+        .comment("Maid damage multiplier(default:1.0,only effective on spellCombatTask)")
+        .defineInRange("maidDamageMultiplier", 1.0, 0, 50.0);
+
+    private static final ForgeConfigSpec.DoubleValue COOLDOWN_MULITIPLIER = BUILDER
+            .comment("女仆法术冷却倍率 (默认: 1.0，仅在法术战斗任务下生效)")
+            .comment("Maid cooldown multiplier(default:1.0,only effective on spellCombatTask)")
+            .defineInRange("maidCooldownMultiplier", 1.0, 0, 50.0);
 
     public static final ForgeConfigSpec SPEC = BUILDER.build();
 
@@ -43,6 +54,7 @@ public class Config {
     public static double maxSpellRange;
     public static double meleeRange;
     public static double spellDamageMultiplier;
+    public static double coolDownMultiplier;
 
 
     @SubscribeEvent
@@ -51,17 +63,23 @@ public class Config {
         maxSpellRange = MAX_SPELL_RANGE.get();
         meleeRange = MELEE_RANGE.get();
         spellDamageMultiplier = SPELL_DAMAGE_MULTIPLIER.get();
+        coolDownMultiplier = COOLDOWN_MULITIPLIER.get();
 
         SpellCombatTask.setSpellRange((float) maxSpellRange);
         SimplifiedSpellCaster.MELEE_RANGE= (float) meleeRange;
 
-
-
         Global.common_damageProcessors.add((hurtEvent,maid)->{
-            hurtEvent.setAmount((float) (hurtEvent.getAmount()*spellDamageMultiplier));
+            if(maid.getTask().getUid().toString().startsWith("maidspell")) {
+                hurtEvent.setAmount((float) (hurtEvent.getAmount()*spellDamageMultiplier));
+            }
             return null;
         });
 
+        Global.common_coolDownProcessors.add((coolDown -> {
+            coolDown.cooldownticks= (int)(coolDown.cooldownticks*coolDownMultiplier);
+            return null;
+        }));
     }
+
 
 }

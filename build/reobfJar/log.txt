@@ -218,9 +218,38 @@ Conflicting propagated mapping for com/github/tartaricacid/touhoulittlemaid/enti
 Conflicting propagated mapping for com/github/tartaricacid/touhoulittlemaid/entity/passive/EntityMaid/shootCrossbowProjectile(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/projectile/Projectile;F)V from net/minecraft/world/entity/monster/CrossbowAttackMob/shootCrossbowProjectile(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/projectile/Projectile;F)V: shootCrossbowProjectile -> m_5811_
 Conflicting propagated mapping for com/github/tartaricacid/touhoulittlemaid/entity/passive/EntityMaid/setChargingCrossbow(Z)V from net/minecraft/world/entity/monster/CrossbowAttackMob/setChargingCrossbow(Z)V: setChargingCrossbow -> m_6136_
 Conflicting propagated mapping for com/github/tartaricacid/touhoulittlemaid/api/entity/IMaid/onClimbable()Z from com/github/tartaricacid/touhoulittlemaid/entity/passive/EntityMaid/onClimbable()Z: onClimbable -> m_6147_
+Conflicting propagated mapping for com/github/yimeng261/maidspell/item/bauble/bleedingHeart/BleedingHeart/appendHoverText(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Ljava/util/List;Lnet/minecraft/world/item/TooltipFlag;)V from net/minecraft/world/item/Item/appendHoverText(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Ljava/util/List;Lnet/minecraft/world/item/TooltipFlag;)V: appendHoverText -> m_7373_
+Conflicting propagated mapping for com/github/yimeng261/maidspell/item/bauble/flowCore/FlowCore/appendHoverText(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Ljava/util/List;Lnet/minecraft/world/item/TooltipFlag;)V from net/minecraft/world/item/Item/appendHoverText(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Ljava/util/List;Lnet/minecraft/world/item/TooltipFlag;)V: appendHoverText -> m_7373_
+Conflicting propagated mapping for com/github/yimeng261/maidspell/item/bauble/bleedingHeart/BleedingHeart/isFoil(Lnet/minecraft/world/item/ItemStack;)Z from net/minecraft/world/item/Item/isFoil(Lnet/minecraft/world/item/ItemStack;)Z: isFoil -> m_5812_
+Conflicting propagated mapping for com/github/yimeng261/maidspell/item/bauble/flowCore/FlowCore/isFoil(Lnet/minecraft/world/item/ItemStack;)Z from net/minecraft/world/item/Item/isFoil(Lnet/minecraft/world/item/ItemStack;)Z: isFoil -> m_5812_
 Conflicting propagated mapping for net/minecraft/world/entity/LivingEntity/lambda$addAdditionalSaveData$3(Lnet/minecraft/nbt/CompoundTag;Lnet/minecraft/nbt/Tag;)V from net/minecraft/world/entity/player/Player/lambda$addAdditionalSaveData$3(Lnet/minecraft/nbt/CompoundTag;Lnet/minecraft/nbt/Tag;)V: lambda$addAdditionalSaveData$3 -> m_219754_
-Conflicting propagated mapping for com/github/yimeng261/maidspell/item/SpellEnhancementCore/appendHoverText(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Ljava/util/List;Lnet/minecraft/world/item/TooltipFlag;)V from net/minecraft/world/item/Item/appendHoverText(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Ljava/util/List;Lnet/minecraft/world/item/TooltipFlag;)V: appendHoverText -> m_7373_
-Conflicting propagated mapping for com/github/yimeng261/maidspell/item/SpellEnhancementCore/isFoil(Lnet/minecraft/world/item/ItemStack;)Z from net/minecraft/world/item/Item/isFoil(Lnet/minecraft/world/item/ItemStack;)Z: isFoil -> m_5812_
+Conflicting propagated mapping for com/github/yimeng261/maidspell/item/bauble/quickChantRing/QuickChantRing/appendHoverText(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Ljava/util/List;Lnet/minecraft/world/item/TooltipFlag;)V from net/minecraft/world/item/Item/appendHoverText(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Ljava/util/List;Lnet/minecraft/world/item/TooltipFlag;)V: appendHoverText -> m_7373_
+Conflicting propagated mapping for com/github/yimeng261/maidspell/item/bauble/quickChantRing/QuickChantRing/isFoil(Lnet/minecraft/world/item/ItemStack;)Z from net/minecraft/world/item/Item/isFoil(Lnet/minecraft/world/item/ItemStack;)Z: isFoil -> m_5812_
+Conflicting propagated mapping for com/github/yimeng261/maidspell/item/bauble/spellCore/SpellEnhancementCore/appendHoverText(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Ljava/util/List;Lnet/minecraft/world/item/TooltipFlag;)V from net/minecraft/world/item/Item/appendHoverText(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Ljava/util/List;Lnet/minecraft/world/item/TooltipFlag;)V: appendHoverText -> m_7373_
+Conflicting propagated mapping for com/github/yimeng261/maidspell/item/bauble/spellCore/SpellEnhancementCore/isFoil(Lnet/minecraft/world/item/ItemStack;)Z from net/minecraft/world/item/Item/isFoil(Lnet/minecraft/world/item/ItemStack;)Z: isFoil -> m_5812_
+Conflicting propagated mapping for com/github/yimeng261/maidspell/item/bauble/springRing/SpringRing/appendHoverText(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Ljava/util/List;Lnet/minecraft/world/item/TooltipFlag;)V from net/minecraft/world/item/Item/appendHoverText(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Ljava/util/List;Lnet/minecraft/world/item/TooltipFlag;)V: appendHoverText -> m_7373_
+Conflicting propagated mapping for com/github/yimeng261/maidspell/item/bauble/springRing/SpringRing/isFoil(Lnet/minecraft/world/item/ItemStack;)Z from net/minecraft/world/item/Item/isFoil(Lnet/minecraft/world/item/ItemStack;)Z: isFoil -> m_5812_
+Can't Find Class: top/theillusivec4/curios/api/type/capability/ICurioItem
+Conflicting propagated mapping for com/hollingsworth/arsnouveau/common/items/ModItem/appendHoverText(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Ljava/util/List;Lnet/minecraft/world/item/TooltipFlag;)V from net/minecraft/world/item/Item/appendHoverText(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Ljava/util/List;Lnet/minecraft/world/item/TooltipFlag;)V: appendHoverText -> m_7373_
+Conflicting propagated mapping for com/hollingsworth/arsnouveau/common/items/ModItem/getRarity(Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/item/Rarity; from net/minecraft/world/item/Item/getRarity(Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/item/Rarity;: getRarity -> m_41460_
+Conflicting propagated mapping for io/redspace/ironsspellbooks/item/SpellBook/appendHoverText(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Ljava/util/List;Lnet/minecraft/world/item/TooltipFlag;)V from net/minecraft/world/item/Item/appendHoverText(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Ljava/util/List;Lnet/minecraft/world/item/TooltipFlag;)V: appendHoverText -> m_7373_
+Can't Find Class: software/bernie/geckolib/animatable/GeoItem
+Conflicting propagated mapping for io/redspace/ironsspellbooks/item/CastingItem/appendHoverText(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Ljava/util/List;Lnet/minecraft/world/item/TooltipFlag;)V from net/minecraft/world/item/Item/appendHoverText(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Ljava/util/List;Lnet/minecraft/world/item/TooltipFlag;)V: appendHoverText -> m_7373_
+Conflicting propagated mapping for io/redspace/ironsspellbooks/item/CastingItem/getUseAnimation(Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/item/UseAnim; from net/minecraft/world/item/Item/getUseAnimation(Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/item/UseAnim;: getUseAnimation -> m_6164_
+Conflicting propagated mapping for io/redspace/ironsspellbooks/item/CastingItem/use(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResultHolder; from net/minecraft/world/item/Item/use(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResultHolder;: use -> m_7203_
+Conflicting propagated mapping for io/redspace/ironsspellbooks/item/CastingItem/getUseDuration(Lnet/minecraft/world/item/ItemStack;)I from net/minecraft/world/item/Item/getUseDuration(Lnet/minecraft/world/item/ItemStack;)I: getUseDuration -> m_8105_
+Conflicting propagated mapping for io/redspace/ironsspellbooks/item/CastingItem/releaseUsing(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/LivingEntity;I)V from net/minecraft/world/item/Item/releaseUsing(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/LivingEntity;I)V: releaseUsing -> m_5551_
+Conflicting propagated mapping for com/hollingsworth/arsnouveau/common/items/SpellBook/appendHoverText(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Ljava/util/List;Lnet/minecraft/world/item/TooltipFlag;)V from com/hollingsworth/arsnouveau/common/items/ModItem/appendHoverText(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Ljava/util/List;Lnet/minecraft/world/item/TooltipFlag;)V: appendHoverText -> m_7373_
+Conflicting propagated mapping for com/hollingsworth/arsnouveau/common/items/SpellBook/getUseAnimation(Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/item/UseAnim; from net/minecraft/world/item/Item/getUseAnimation(Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/item/UseAnim;: getUseAnimation -> m_6164_
+Conflicting propagated mapping for com/hollingsworth/arsnouveau/common/items/SpellBook/use(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResultHolder; from net/minecraft/world/item/Item/use(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResultHolder;: use -> m_7203_
+Conflicting propagated mapping for com/hollingsworth/arsnouveau/common/items/SpellBook/getUseDuration(Lnet/minecraft/world/item/ItemStack;)I from net/minecraft/world/item/Item/getUseDuration(Lnet/minecraft/world/item/ItemStack;)I: getUseDuration -> m_8105_
+Conflicting propagated mapping for com/hollingsworth/arsnouveau/common/items/SpellBook/canBeDepleted()Z from net/minecraft/world/item/Item/canBeDepleted()Z: canBeDepleted -> m_41465_
+Conflicting propagated mapping for vazkii/psi/common/item/ItemCAD/appendHoverText(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Ljava/util/List;Lnet/minecraft/world/item/TooltipFlag;)V from net/minecraft/world/item/Item/appendHoverText(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Ljava/util/List;Lnet/minecraft/world/item/TooltipFlag;)V: appendHoverText -> m_7373_
+Conflicting propagated mapping for vazkii/psi/common/item/ItemCAD/getRarity(Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/item/Rarity; from net/minecraft/world/item/Item/getRarity(Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/item/Rarity;: getRarity -> m_41460_
+Conflicting propagated mapping for vazkii/psi/common/item/ItemCAD/use(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResultHolder; from net/minecraft/world/item/Item/use(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResultHolder;: use -> m_7203_
+Conflicting propagated mapping for vazkii/psi/common/item/ItemCAD/inventoryTick(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/Entity;IZ)V from net/minecraft/world/item/Item/inventoryTick(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/Entity;IZ)V: inventoryTick -> m_6883_
+Conflicting propagated mapping for vazkii/psi/common/item/ItemCAD/useOn(Lnet/minecraft/world/item/context/UseOnContext;)Lnet/minecraft/world/InteractionResult; from net/minecraft/world/item/Item/useOn(Lnet/minecraft/world/item/context/UseOnContext;)Lnet/minecraft/world/InteractionResult;: useOn -> m_6225_
+Conflicting propagated mapping for io/redspace/ironsspellbooks/api/item/weapons/ExtendedSwordItem/getDefaultAttributeModifiers(Lnet/minecraft/world/entity/EquipmentSlot;)Lcom/google/common/collect/Multimap; from net/minecraft/world/item/SwordItem/getDefaultAttributeModifiers(Lnet/minecraft/world/entity/EquipmentSlot;)Lcom/google/common/collect/Multimap;: getDefaultAttributeModifiers -> m_7167_
 Conflicting propagated mapping for mods/flammpfeil/slashblade/item/ItemSlashBlade/appendHoverText(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Ljava/util/List;Lnet/minecraft/world/item/TooltipFlag;)V from net/minecraft/world/item/Item/appendHoverText(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Ljava/util/List;Lnet/minecraft/world/item/TooltipFlag;)V: appendHoverText -> m_7373_
 Conflicting propagated mapping for mods/flammpfeil/slashblade/item/ItemSlashBlade/getRarity(Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/item/Rarity; from net/minecraft/world/item/Item/getRarity(Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/item/Rarity;: getRarity -> m_41460_
 Conflicting propagated mapping for mods/flammpfeil/slashblade/item/ItemSlashBlade/use(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResultHolder; from net/minecraft/world/item/Item/use(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResultHolder;: use -> m_7203_
@@ -233,66 +262,39 @@ Conflicting propagated mapping for mods/flammpfeil/slashblade/item/ItemSlashBlad
 Conflicting propagated mapping for mods/flammpfeil/slashblade/item/ItemSlashBlade/isBarVisible(Lnet/minecraft/world/item/ItemStack;)Z from net/minecraft/world/item/Item/isBarVisible(Lnet/minecraft/world/item/ItemStack;)Z: isBarVisible -> m_142522_
 Conflicting propagated mapping for mods/flammpfeil/slashblade/item/ItemSlashBlade/inventoryTick(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/Entity;IZ)V from net/minecraft/world/item/Item/inventoryTick(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/Entity;IZ)V: inventoryTick -> m_6883_
 Conflicting propagated mapping for mods/flammpfeil/slashblade/item/ItemSlashBlade/getDescriptionId(Lnet/minecraft/world/item/ItemStack;)Ljava/lang/String; from net/minecraft/world/item/Item/getDescriptionId(Lnet/minecraft/world/item/ItemStack;)Ljava/lang/String;: getDescriptionId -> m_5671_
-Conflicting propagated mapping for com/hollingsworth/arsnouveau/common/items/ModItem/appendHoverText(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Ljava/util/List;Lnet/minecraft/world/item/TooltipFlag;)V from net/minecraft/world/item/Item/appendHoverText(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Ljava/util/List;Lnet/minecraft/world/item/TooltipFlag;)V: appendHoverText -> m_7373_
-Conflicting propagated mapping for com/hollingsworth/arsnouveau/common/items/ModItem/getRarity(Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/item/Rarity; from net/minecraft/world/item/Item/getRarity(Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/item/Rarity;: getRarity -> m_41460_
-Can't Find Class: software/bernie/geckolib/animatable/GeoItem
-Conflicting propagated mapping for com/hollingsworth/arsnouveau/common/items/SpellBook/appendHoverText(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Ljava/util/List;Lnet/minecraft/world/item/TooltipFlag;)V from com/hollingsworth/arsnouveau/common/items/ModItem/appendHoverText(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Ljava/util/List;Lnet/minecraft/world/item/TooltipFlag;)V: appendHoverText -> m_7373_
-Conflicting propagated mapping for com/hollingsworth/arsnouveau/common/items/SpellBook/getUseAnimation(Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/item/UseAnim; from net/minecraft/world/item/Item/getUseAnimation(Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/item/UseAnim;: getUseAnimation -> m_6164_
-Conflicting propagated mapping for com/hollingsworth/arsnouveau/common/items/SpellBook/use(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResultHolder; from net/minecraft/world/item/Item/use(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResultHolder;: use -> m_7203_
-Conflicting propagated mapping for com/hollingsworth/arsnouveau/common/items/SpellBook/getUseDuration(Lnet/minecraft/world/item/ItemStack;)I from net/minecraft/world/item/Item/getUseDuration(Lnet/minecraft/world/item/ItemStack;)I: getUseDuration -> m_8105_
-Conflicting propagated mapping for com/hollingsworth/arsnouveau/common/items/SpellBook/canBeDepleted()Z from net/minecraft/world/item/Item/canBeDepleted()Z: canBeDepleted -> m_41465_
-Can't Find Class: top/theillusivec4/curios/api/type/capability/ICurioItem
-Conflicting propagated mapping for io/redspace/ironsspellbooks/item/SpellBook/appendHoverText(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Ljava/util/List;Lnet/minecraft/world/item/TooltipFlag;)V from net/minecraft/world/item/Item/appendHoverText(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Ljava/util/List;Lnet/minecraft/world/item/TooltipFlag;)V: appendHoverText -> m_7373_
-Conflicting propagated mapping for io/redspace/ironsspellbooks/item/CastingItem/appendHoverText(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Ljava/util/List;Lnet/minecraft/world/item/TooltipFlag;)V from net/minecraft/world/item/Item/appendHoverText(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Ljava/util/List;Lnet/minecraft/world/item/TooltipFlag;)V: appendHoverText -> m_7373_
-Conflicting propagated mapping for io/redspace/ironsspellbooks/item/CastingItem/getUseAnimation(Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/item/UseAnim; from net/minecraft/world/item/Item/getUseAnimation(Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/item/UseAnim;: getUseAnimation -> m_6164_
-Conflicting propagated mapping for io/redspace/ironsspellbooks/item/CastingItem/use(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResultHolder; from net/minecraft/world/item/Item/use(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResultHolder;: use -> m_7203_
-Conflicting propagated mapping for io/redspace/ironsspellbooks/item/CastingItem/getUseDuration(Lnet/minecraft/world/item/ItemStack;)I from net/minecraft/world/item/Item/getUseDuration(Lnet/minecraft/world/item/ItemStack;)I: getUseDuration -> m_8105_
-Conflicting propagated mapping for io/redspace/ironsspellbooks/item/CastingItem/releaseUsing(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/LivingEntity;I)V from net/minecraft/world/item/Item/releaseUsing(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/LivingEntity;I)V: releaseUsing -> m_5551_
+Conflicting propagated mapping for io/redspace/ironsspellbooks/item/weapons/StaffItem/isEnchantable(Lnet/minecraft/world/item/ItemStack;)Z from net/minecraft/world/item/Item/isEnchantable(Lnet/minecraft/world/item/ItemStack;)Z: isEnchantable -> m_8120_
+Conflicting propagated mapping for io/redspace/ironsspellbooks/item/weapons/StaffItem/getEnchantmentValue()I from net/minecraft/world/item/Item/getEnchantmentValue()I: getEnchantmentValue -> m_6473_
+Conflicting propagated mapping for com/Polarice3/Goety/common/items/magic/FocusBag/use(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResultHolder; from net/minecraft/world/item/Item/use(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResultHolder;: use -> m_7203_
 Conflicting propagated mapping for com/github/yimeng261/maidspell/task/SpellCombatTask$UnifiedSpellCombatBehavior/tick(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)V from net/minecraft/world/entity/ai/behavior/Behavior/tick(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)V: tick -> m_6725_
 Conflicting propagated mapping for com/github/yimeng261/maidspell/task/SpellCombatTask$UnifiedSpellCombatBehavior/start(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)V from net/minecraft/world/entity/ai/behavior/Behavior/start(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)V: start -> m_6735_
 Conflicting propagated mapping for com/github/yimeng261/maidspell/task/SpellCombatTask$UnifiedSpellCombatBehavior/canStillUse(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)Z from net/minecraft/world/entity/ai/behavior/Behavior/canStillUse(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)Z: canStillUse -> m_6737_
 Conflicting propagated mapping for com/github/yimeng261/maidspell/task/SpellCombatTask$UnifiedSpellCombatBehavior/stop(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)V from net/minecraft/world/entity/ai/behavior/Behavior/stop(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;J)V: stop -> m_6732_
 Conflicting propagated mapping for com/github/yimeng261/maidspell/task/SpellCombatTask$UnifiedSpellCombatBehavior/checkExtraStartConditions(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;)Z from net/minecraft/world/entity/ai/behavior/Behavior/checkExtraStartConditions(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;)Z: checkExtraStartConditions -> m_6114_
-Conflicting propagated mapping for io/redspace/ironsspellbooks/api/item/weapons/ExtendedSwordItem/getDefaultAttributeModifiers(Lnet/minecraft/world/entity/EquipmentSlot;)Lcom/google/common/collect/Multimap; from net/minecraft/world/item/SwordItem/getDefaultAttributeModifiers(Lnet/minecraft/world/entity/EquipmentSlot;)Lcom/google/common/collect/Multimap;: getDefaultAttributeModifiers -> m_7167_
-Conflicting propagated mapping for io/redspace/ironsspellbooks/item/weapons/StaffItem/isEnchantable(Lnet/minecraft/world/item/ItemStack;)Z from net/minecraft/world/item/Item/isEnchantable(Lnet/minecraft/world/item/ItemStack;)Z: isEnchantable -> m_8120_
-Conflicting propagated mapping for io/redspace/ironsspellbooks/item/weapons/StaffItem/getEnchantmentValue()I from net/minecraft/world/item/Item/getEnchantmentValue()I: getEnchantmentValue -> m_6473_
-Conflicting propagated mapping for vazkii/psi/common/item/ItemCAD/appendHoverText(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Ljava/util/List;Lnet/minecraft/world/item/TooltipFlag;)V from net/minecraft/world/item/Item/appendHoverText(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Ljava/util/List;Lnet/minecraft/world/item/TooltipFlag;)V: appendHoverText -> m_7373_
-Conflicting propagated mapping for vazkii/psi/common/item/ItemCAD/getRarity(Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/item/Rarity; from net/minecraft/world/item/Item/getRarity(Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/item/Rarity;: getRarity -> m_41460_
-Conflicting propagated mapping for vazkii/psi/common/item/ItemCAD/use(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResultHolder; from net/minecraft/world/item/Item/use(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResultHolder;: use -> m_7203_
-Conflicting propagated mapping for vazkii/psi/common/item/ItemCAD/inventoryTick(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/Entity;IZ)V from net/minecraft/world/item/Item/inventoryTick(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/Entity;IZ)V: inventoryTick -> m_6883_
-Conflicting propagated mapping for vazkii/psi/common/item/ItemCAD/useOn(Lnet/minecraft/world/item/context/UseOnContext;)Lnet/minecraft/world/InteractionResult; from net/minecraft/world/item/Item/useOn(Lnet/minecraft/world/item/context/UseOnContext;)Lnet/minecraft/world/InteractionResult;: useOn -> m_6225_
 Conflicting propagated mapping for net/minecraftforge/common/util/FakePlayer/isInvulnerableTo(Lnet/minecraft/world/damagesource/DamageSource;)Z from net/minecraft/server/level/ServerPlayer/isInvulnerableTo(Lnet/minecraft/world/damagesource/DamageSource;)Z: isInvulnerableTo -> m_6673_
 Conflicting propagated mapping for net/minecraftforge/common/util/FakePlayer/canHarmPlayer(Lnet/minecraft/world/entity/player/Player;)Z from net/minecraft/server/level/ServerPlayer/canHarmPlayer(Lnet/minecraft/world/entity/player/Player;)Z: canHarmPlayer -> m_7099_
 Conflicting propagated mapping for net/minecraftforge/common/util/FakePlayer/updateOptions(Lnet/minecraft/network/protocol/game/ServerboundClientInformationPacket;)V from net/minecraft/server/level/ServerPlayer/updateOptions(Lnet/minecraft/network/protocol/game/ServerboundClientInformationPacket;)V: updateOptions -> m_9156_
-Conflicting propagated mapping for com/hollingsworth/arsnouveau/common/entity/ColoredProjectile/load(Lnet/minecraft/nbt/CompoundTag;)V from net/minecraft/world/entity/Entity/load(Lnet/minecraft/nbt/CompoundTag;)V: load -> m_20258_
 Conflicting propagated mapping for net/minecraftforge/common/util/FakePlayer/displayClientMessage(Lnet/minecraft/network/chat/Component;Z)V from net/minecraft/server/level/ServerPlayer/displayClientMessage(Lnet/minecraft/network/chat/Component;Z)V: displayClientMessage -> m_5661_
 Conflicting propagated mapping for net/minecraftforge/common/util/FakePlayer/die(Lnet/minecraft/world/damagesource/DamageSource;)V from net/minecraft/server/level/ServerPlayer/die(Lnet/minecraft/world/damagesource/DamageSource;)V: die -> m_6667_
 Conflicting propagated mapping for net/minecraftforge/common/util/FakePlayer/tick()V from net/minecraft/server/level/ServerPlayer/tick()V: tick -> m_8119_
+Conflicting propagated mapping for net/minecraftforge/common/util/FakePlayer/getServer()Lnet/minecraft/server/MinecraftServer; from net/minecraft/world/entity/Entity/getServer()Lnet/minecraft/server/MinecraftServer;: getServer -> m_20194_
+Conflicting propagated mapping for net/minecraftforge/common/util/FakePlayer/awardStat(Lnet/minecraft/stats/Stat;I)V from net/minecraft/server/level/ServerPlayer/awardStat(Lnet/minecraft/stats/Stat;I)V: awardStat -> m_6278_
+Conflicting propagated mapping for com/hollingsworth/arsnouveau/common/entity/ColoredProjectile/load(Lnet/minecraft/nbt/CompoundTag;)V from net/minecraft/world/entity/Entity/load(Lnet/minecraft/nbt/CompoundTag;)V: load -> m_20258_
 Conflicting propagated mapping for com/hollingsworth/arsnouveau/common/entity/ColoredProjectile/defineSynchedData()V from net/minecraft/world/entity/Entity/defineSynchedData()V: defineSynchedData -> m_8097_
 Conflicting propagated mapping for com/hollingsworth/arsnouveau/common/entity/ColoredProjectile/addAdditionalSaveData(Lnet/minecraft/nbt/CompoundTag;)V from net/minecraft/world/entity/projectile/Projectile/addAdditionalSaveData(Lnet/minecraft/nbt/CompoundTag;)V: addAdditionalSaveData -> m_7380_
-Conflicting propagated mapping for net/minecraftforge/common/util/FakePlayer/getServer()Lnet/minecraft/server/MinecraftServer; from net/minecraft/world/entity/Entity/getServer()Lnet/minecraft/server/MinecraftServer;: getServer -> m_20194_
-Conflicting propagated mapping for com/hollingsworth/arsnouveau/common/entity/EntityProjectileSpell/getType()Lnet/minecraft/world/entity/EntityType; from net/minecraft/world/entity/Entity/getType()Lnet/minecraft/world/entity/EntityType;: getType -> m_6095_
-Conflicting propagated mapping for com/hollingsworth/arsnouveau/common/entity/EntityProjectileSpell/onHit(Lnet/minecraft/world/phys/HitResult;)V from net/minecraft/world/entity/projectile/Projectile/onHit(Lnet/minecraft/world/phys/HitResult;)V: onHit -> m_6532_
-Conflicting propagated mapping for com/hollingsworth/arsnouveau/common/entity/EntityProjectileSpell/shoot(DDDFF)V from net/minecraft/world/entity/projectile/Projectile/shoot(DDDFF)V: shoot -> m_6686_
-Conflicting propagated mapping for com/hollingsworth/arsnouveau/common/entity/EntityProjectileSpell/readAdditionalSaveData(Lnet/minecraft/nbt/CompoundTag;)V from net/minecraft/world/entity/projectile/Projectile/readAdditionalSaveData(Lnet/minecraft/nbt/CompoundTag;)V: readAdditionalSaveData -> m_7378_
-Conflicting propagated mapping for com/hollingsworth/arsnouveau/common/entity/EntityProjectileSpell/recreateFromPacket(Lnet/minecraft/network/protocol/game/ClientboundAddEntityPacket;)V from net/minecraft/world/entity/projectile/Projectile/recreateFromPacket(Lnet/minecraft/network/protocol/game/ClientboundAddEntityPacket;)V: recreateFromPacket -> m_141965_
-Conflicting propagated mapping for com/hollingsworth/arsnouveau/common/entity/EntityProjectileSpell/tick()V from net/minecraft/world/entity/projectile/Projectile/tick()V: tick -> m_8119_
-Conflicting propagated mapping for com/hollingsworth/arsnouveau/common/entity/EntityProjectileSpell/setOwner(Lnet/minecraft/world/entity/Entity;)V from net/minecraft/world/entity/projectile/Projectile/setOwner(Lnet/minecraft/world/entity/Entity;)V: setOwner -> m_5602_
-Conflicting propagated mapping for com/hollingsworth/arsnouveau/common/entity/EntityProjectileSpell/isNoGravity()Z from net/minecraft/world/entity/Entity/isNoGravity()Z: isNoGravity -> m_20068_
-Conflicting propagated mapping for com/hollingsworth/arsnouveau/common/entity/EntityProjectileSpell/getAddEntityPacket()Lnet/minecraft/network/protocol/Packet; from net/minecraft/world/entity/projectile/Projectile/getAddEntityPacket()Lnet/minecraft/network/protocol/Packet;: getAddEntityPacket -> m_5654_
-Conflicting propagated mapping for com/hollingsworth/arsnouveau/common/entity/EntityProjectileSpell/defineSynchedData()V from com/hollingsworth/arsnouveau/common/entity/ColoredProjectile/defineSynchedData()V: defineSynchedData -> m_8097_
-Conflicting propagated mapping for com/hollingsworth/arsnouveau/common/entity/EntityProjectileSpell/setRemoved(Lnet/minecraft/world/entity/Entity$RemovalReason;)V from net/minecraft/world/entity/Entity/setRemoved(Lnet/minecraft/world/entity/Entity$RemovalReason;)V: setRemoved -> m_142467_
-Conflicting propagated mapping for com/hollingsworth/arsnouveau/common/entity/EntityProjectileSpell/addAdditionalSaveData(Lnet/minecraft/nbt/CompoundTag;)V from com/hollingsworth/arsnouveau/common/entity/ColoredProjectile/addAdditionalSaveData(Lnet/minecraft/nbt/CompoundTag;)V: addAdditionalSaveData -> m_7380_
-Conflicting propagated mapping for com/hollingsworth/arsnouveau/common/entity/EntityProjectileSpell/canHitEntity(Lnet/minecraft/world/entity/Entity;)Z from net/minecraft/world/entity/projectile/Projectile/canHitEntity(Lnet/minecraft/world/entity/Entity;)Z: canHitEntity -> m_5603_
-Conflicting propagated mapping for net/minecraftforge/common/util/FakePlayer/awardStat(Lnet/minecraft/stats/Stat;I)V from net/minecraft/server/level/ServerPlayer/awardStat(Lnet/minecraft/stats/Stat;I)V: awardStat -> m_6278_
-Conflicting propagated mapping for com/Polarice3/Goety/common/items/magic/FocusBag/use(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResultHolder; from net/minecraft/world/item/Item/use(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResultHolder;: use -> m_7203_
 Conflicting propagated mapping for mods/flammpfeil/slashblade/entity/Projectile/setOwner(Lnet/minecraft/world/entity/Entity;)V from net/minecraft/world/entity/projectile/Projectile/setOwner(Lnet/minecraft/world/entity/Entity;)V: setOwner -> m_5602_
 Conflicting propagated mapping for mods/flammpfeil/slashblade/entity/Projectile/defineSynchedData()V from net/minecraft/world/entity/Entity/defineSynchedData()V: defineSynchedData -> m_8097_
 Conflicting propagated mapping for mods/flammpfeil/slashblade/entity/Projectile/getOwner()Lnet/minecraft/world/entity/Entity; from net/minecraft/world/entity/projectile/Projectile/getOwner()Lnet/minecraft/world/entity/Entity;: getOwner -> m_19749_
 Conflicting propagated mapping for mods/flammpfeil/slashblade/entity/Projectile/fireImmune()Z from net/minecraft/world/entity/Entity/fireImmune()Z: fireImmune -> m_5825_
+Conflicting propagated mapping for com/hollingsworth/arsnouveau/common/entity/EntityProjectileSpell/getType()Lnet/minecraft/world/entity/EntityType; from net/minecraft/world/entity/Entity/getType()Lnet/minecraft/world/entity/EntityType;: getType -> m_6095_
+Conflicting propagated mapping for com/hollingsworth/arsnouveau/common/entity/EntityProjectileSpell/onHit(Lnet/minecraft/world/phys/HitResult;)V from net/minecraft/world/entity/projectile/Projectile/onHit(Lnet/minecraft/world/phys/HitResult;)V: onHit -> m_6532_
+Conflicting propagated mapping for com/hollingsworth/arsnouveau/common/entity/EntityProjectileSpell/shoot(DDDFF)V from net/minecraft/world/entity/projectile/Projectile/shoot(DDDFF)V: shoot -> m_6686_
+Conflicting propagated mapping for com/hollingsworth/arsnouveau/common/entity/EntityProjectileSpell/readAdditionalSaveData(Lnet/minecraft/nbt/CompoundTag;)V from net/minecraft/world/entity/projectile/Projectile/readAdditionalSaveData(Lnet/minecraft/nbt/CompoundTag;)V: readAdditionalSaveData -> m_7378_
 Conflicting propagated mapping for mods/flammpfeil/slashblade/entity/EntitySlashEffect/shoot(DDDFF)V from net/minecraft/world/entity/projectile/Projectile/shoot(DDDFF)V: shoot -> m_6686_
 Conflicting propagated mapping for mods/flammpfeil/slashblade/entity/EntitySlashEffect/readAdditionalSaveData(Lnet/minecraft/nbt/CompoundTag;)V from net/minecraft/world/entity/projectile/Projectile/readAdditionalSaveData(Lnet/minecraft/nbt/CompoundTag;)V: readAdditionalSaveData -> m_7378_
 Conflicting propagated mapping for mods/flammpfeil/slashblade/entity/EntitySlashEffect/tick()V from net/minecraft/world/entity/projectile/Projectile/tick()V: tick -> m_8119_
+Conflicting propagated mapping for com/hollingsworth/arsnouveau/common/entity/EntityProjectileSpell/recreateFromPacket(Lnet/minecraft/network/protocol/game/ClientboundAddEntityPacket;)V from net/minecraft/world/entity/projectile/Projectile/recreateFromPacket(Lnet/minecraft/network/protocol/game/ClientboundAddEntityPacket;)V: recreateFromPacket -> m_141965_
+Conflicting propagated mapping for com/hollingsworth/arsnouveau/common/entity/EntityProjectileSpell/tick()V from net/minecraft/world/entity/projectile/Projectile/tick()V: tick -> m_8119_
+Conflicting propagated mapping for com/hollingsworth/arsnouveau/common/entity/EntityProjectileSpell/setOwner(Lnet/minecraft/world/entity/Entity;)V from net/minecraft/world/entity/projectile/Projectile/setOwner(Lnet/minecraft/world/entity/Entity;)V: setOwner -> m_5602_
 Conflicting propagated mapping for mods/flammpfeil/slashblade/entity/EntitySlashEffect/shouldRenderAtSqrDistance(D)Z from net/minecraft/world/entity/Entity/shouldRenderAtSqrDistance(D)Z: shouldRenderAtSqrDistance -> m_6783_
 Conflicting propagated mapping for mods/flammpfeil/slashblade/entity/EntitySlashEffect/getAddEntityPacket()Lnet/minecraft/network/protocol/Packet; from net/minecraft/world/entity/projectile/Projectile/getAddEntityPacket()Lnet/minecraft/network/protocol/Packet;: getAddEntityPacket -> m_5654_
 Conflicting propagated mapping for mods/flammpfeil/slashblade/entity/EntitySlashEffect/lerpTo(DDDFFIZ)V from net/minecraft/world/entity/Entity/lerpTo(DDDFFIZ)V: lerpTo -> m_6453_
@@ -300,6 +302,12 @@ Conflicting propagated mapping for mods/flammpfeil/slashblade/entity/EntitySlash
 Conflicting propagated mapping for mods/flammpfeil/slashblade/entity/EntitySlashEffect/defineSynchedData()V from mods/flammpfeil/slashblade/entity/Projectile/defineSynchedData()V: defineSynchedData -> m_8097_
 Conflicting propagated mapping for mods/flammpfeil/slashblade/entity/EntitySlashEffect/addAdditionalSaveData(Lnet/minecraft/nbt/CompoundTag;)V from net/minecraft/world/entity/projectile/Projectile/addAdditionalSaveData(Lnet/minecraft/nbt/CompoundTag;)V: addAdditionalSaveData -> m_7380_
 Conflicting propagated mapping for mods/flammpfeil/slashblade/entity/IShootable/shoot(DDDFF)V from mods/flammpfeil/slashblade/entity/EntitySlashEffect/shoot(DDDFF)V: shoot -> m_6686_
+Conflicting propagated mapping for com/hollingsworth/arsnouveau/common/entity/EntityProjectileSpell/isNoGravity()Z from net/minecraft/world/entity/Entity/isNoGravity()Z: isNoGravity -> m_20068_
+Conflicting propagated mapping for com/hollingsworth/arsnouveau/common/entity/EntityProjectileSpell/getAddEntityPacket()Lnet/minecraft/network/protocol/Packet; from net/minecraft/world/entity/projectile/Projectile/getAddEntityPacket()Lnet/minecraft/network/protocol/Packet;: getAddEntityPacket -> m_5654_
+Conflicting propagated mapping for com/hollingsworth/arsnouveau/common/entity/EntityProjectileSpell/defineSynchedData()V from com/hollingsworth/arsnouveau/common/entity/ColoredProjectile/defineSynchedData()V: defineSynchedData -> m_8097_
+Conflicting propagated mapping for com/hollingsworth/arsnouveau/common/entity/EntityProjectileSpell/setRemoved(Lnet/minecraft/world/entity/Entity$RemovalReason;)V from net/minecraft/world/entity/Entity/setRemoved(Lnet/minecraft/world/entity/Entity$RemovalReason;)V: setRemoved -> m_142467_
+Conflicting propagated mapping for com/hollingsworth/arsnouveau/common/entity/EntityProjectileSpell/addAdditionalSaveData(Lnet/minecraft/nbt/CompoundTag;)V from com/hollingsworth/arsnouveau/common/entity/ColoredProjectile/addAdditionalSaveData(Lnet/minecraft/nbt/CompoundTag;)V: addAdditionalSaveData -> m_7380_
+Conflicting propagated mapping for com/hollingsworth/arsnouveau/common/entity/EntityProjectileSpell/canHitEntity(Lnet/minecraft/world/entity/Entity;)Z from net/minecraft/world/entity/projectile/Projectile/canHitEntity(Lnet/minecraft/world/entity/Entity;)Z: canHitEntity -> m_5603_
 Conflicting propagated mapping for io/redspace/ironsspellbooks/entity/spells/target_area/TargetedAreaEntity/getDimensions(Lnet/minecraft/world/entity/Pose;)Lnet/minecraft/world/entity/EntityDimensions; from net/minecraft/world/entity/Entity/getDimensions(Lnet/minecraft/world/entity/Pose;)Lnet/minecraft/world/entity/EntityDimensions;: getDimensions -> m_6972_
 Conflicting propagated mapping for io/redspace/ironsspellbooks/entity/spells/target_area/TargetedAreaEntity/readAdditionalSaveData(Lnet/minecraft/nbt/CompoundTag;)V from net/minecraft/world/entity/Entity/readAdditionalSaveData(Lnet/minecraft/nbt/CompoundTag;)V: readAdditionalSaveData -> m_7378_
 Conflicting propagated mapping for io/redspace/ironsspellbooks/entity/spells/target_area/TargetedAreaEntity/onSyncedDataUpdated(Lnet/minecraft/network/syncher/EntityDataAccessor;)V from net/minecraft/world/entity/Entity/onSyncedDataUpdated(Lnet/minecraft/network/syncher/EntityDataAccessor;)V: onSyncedDataUpdated -> m_7350_
@@ -318,23 +326,29 @@ Writing Output: C:\Users\mc\forge-1.20.1-47.4.0-mdk\build\reobfJar\output.jar
   META-INF/accesstransformer.cfg
   META-INF/mods.toml
   assets/
-  assets/maidcurios/
-  assets/maidcurios/lang/
-  assets/maidcurios/lang/en_us.json
-  assets/maidcurios/lang/zh_cn.json
-  assets/maidcurios/textures/
-  assets/maidcurios/textures/task/
-  assets/maidcurios/textures/task/spell_combat.png.mcmeta
   assets/touhou_little_maid_spell/
   assets/touhou_little_maid_spell/lang/
   assets/touhou_little_maid_spell/lang/en_us.json
   assets/touhou_little_maid_spell/lang/zh_cn.json
   assets/touhou_little_maid_spell/models/
   assets/touhou_little_maid_spell/models/item/
+  assets/touhou_little_maid_spell/models/item/bleeding_heart.json
+  assets/touhou_little_maid_spell/models/item/flow_core.json
+  assets/touhou_little_maid_spell/models/item/quick_chant_ring.json
   assets/touhou_little_maid_spell/models/item/spell_enhancement_core.json
+  assets/touhou_little_maid_spell/models/item/spring_ring.json
   assets/touhou_little_maid_spell/textures/
   assets/touhou_little_maid_spell/textures/item/
+  assets/touhou_little_maid_spell/textures/item/bleeding_heart.png
+  assets/touhou_little_maid_spell/textures/item/bleeding_heart.png.mcmeta
+  assets/touhou_little_maid_spell/textures/item/flow_core.png
+  assets/touhou_little_maid_spell/textures/item/flow_core.png.mcmeta
+  assets/touhou_little_maid_spell/textures/item/quick_chant_ring.png
+  assets/touhou_little_maid_spell/textures/item/sliver_cercis.png
   assets/touhou_little_maid_spell/textures/item/spell_enhancement_core.png
+  assets/touhou_little_maid_spell/textures/item/spell_enhancement_core.png.mcmeta
+  assets/touhou_little_maid_spell/textures/item/spring_ring.png
+  assets/touhou_little_maid_spell/textures/item/????????-??????.gif
   com/
   com/github/
   com/github/yimeng261/
@@ -344,25 +358,37 @@ Writing Output: C:\Users\mc\forge-1.20.1-47.4.0-mdk\build\reobfJar\output.jar
   com/github/yimeng261/maidspell/Global.class
   com/github/yimeng261/maidspell/MaidSpellMod.class
   com/github/yimeng261/maidspell/api/
+  com/github/yimeng261/maidspell/api/AbstractSpellData$CoolDown.class
+  com/github/yimeng261/maidspell/api/AbstractSpellData.class
   com/github/yimeng261/maidspell/api/IExtendBauble.class
   com/github/yimeng261/maidspell/api/ISpellBookProvider.class
-  com/github/yimeng261/maidspell/api/MaidSpellBaubleRegistry.class
-  com/github/yimeng261/maidspell/api/SpellBookProviderRegistry.class
-  com/github/yimeng261/maidspell/bauble/
-  com/github/yimeng261/maidspell/bauble/SpellEnhancementBauble$AttributeConfig.class
-  com/github/yimeng261/maidspell/bauble/SpellEnhancementBauble.class
-  com/github/yimeng261/maidspell/command/
-  com/github/yimeng261/maidspell/command/CommandRegistry.class
-  com/github/yimeng261/maidspell/command/MaidCommand.class
+  com/github/yimeng261/maidspell/api/ISpellData.class
   com/github/yimeng261/maidspell/event/
   com/github/yimeng261/maidspell/event/MaidSpellEventHandler.class
   com/github/yimeng261/maidspell/inventory/
   com/github/yimeng261/maidspell/inventory/MaidAwareBaubleItemHandler.class
   com/github/yimeng261/maidspell/inventory/SpellBookAwareMaidBackpackHandler.class
   com/github/yimeng261/maidspell/item/
+  com/github/yimeng261/maidspell/item/MaidBaubleRegistry.class
   com/github/yimeng261/maidspell/item/MaidSpellCreativeTab.class
   com/github/yimeng261/maidspell/item/MaidSpellItems.class
-  com/github/yimeng261/maidspell/item/SpellEnhancementCore.class
+  com/github/yimeng261/maidspell/item/bauble/
+  com/github/yimeng261/maidspell/item/bauble/bleedingHeart/
+  com/github/yimeng261/maidspell/item/bauble/bleedingHeart/BleedingHeart.class
+  com/github/yimeng261/maidspell/item/bauble/bleedingHeart/BleedingHeartBauble.class
+  com/github/yimeng261/maidspell/item/bauble/flowCore/
+  com/github/yimeng261/maidspell/item/bauble/flowCore/FlowCore.class
+  com/github/yimeng261/maidspell/item/bauble/flowCore/FlowCoreBauble.class
+  com/github/yimeng261/maidspell/item/bauble/quickChantRing/
+  com/github/yimeng261/maidspell/item/bauble/quickChantRing/QuickChantBauble.class
+  com/github/yimeng261/maidspell/item/bauble/quickChantRing/QuickChantRing.class
+  com/github/yimeng261/maidspell/item/bauble/spellCore/
+  com/github/yimeng261/maidspell/item/bauble/spellCore/SpellEnhancementBauble$AttributeConfig.class
+  com/github/yimeng261/maidspell/item/bauble/spellCore/SpellEnhancementBauble.class
+  com/github/yimeng261/maidspell/item/bauble/spellCore/SpellEnhancementCore.class
+  com/github/yimeng261/maidspell/item/bauble/springRing/
+  com/github/yimeng261/maidspell/item/bauble/springRing/SpringBauble.class
+  com/github/yimeng261/maidspell/item/bauble/springRing/SpringRing.class
   com/github/yimeng261/maidspell/mixin/
   com/github/yimeng261/maidspell/mixin/EntityMaidMixin.class
   com/github/yimeng261/maidspell/spell/
@@ -381,7 +407,6 @@ Writing Output: C:\Users\mc\forge-1.20.1-47.4.0-mdk\build\reobfJar\output.jar
   com/github/yimeng261/maidspell/spell/providers/ArsNouveauProvider.class
   com/github/yimeng261/maidspell/spell/providers/GoetyProvider.class
   com/github/yimeng261/maidspell/spell/providers/IronsSpellbooksProvider.class
-  com/github/yimeng261/maidspell/spell/providers/PsiProvider$VirtualPlayerData.class
   com/github/yimeng261/maidspell/spell/providers/PsiProvider.class
   com/github/yimeng261/maidspell/spell/providers/SlashBladeProvider.class
   com/github/yimeng261/maidspell/task/
@@ -391,6 +416,8 @@ Writing Output: C:\Users\mc\forge-1.20.1-47.4.0-mdk\build\reobfJar\output.jar
   data/
   data/touhou_little_maid_spell/
   data/touhou_little_maid_spell/recipes/
+  data/touhou_little_maid_spell/recipes/bleeding_heart.json
+  data/touhou_little_maid_spell/recipes/flow_core.json
   data/touhou_little_maid_spell/recipes/spell_enhancement_core.json
   maidcurios.mixins.json
   maidcurios.refmap.json

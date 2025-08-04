@@ -1,9 +1,13 @@
 package com.github.yimeng261.maidspell.item;
 
-import com.github.yimeng261.maidspell.MaidSpellMod;
+import com.github.yimeng261.maidspell.item.bauble.bleedingHeart.BleedingHeart;
+import com.github.yimeng261.maidspell.item.bauble.flowCore.FlowCore;
+import com.github.yimeng261.maidspell.item.bauble.quickChantRing.QuickChantRing;
+import com.github.yimeng261.maidspell.item.bauble.spellCore.SpellEnhancementCore;
+import com.github.yimeng261.maidspell.item.bauble.springRing.SpringRing;
+import net.minecraft.Util;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -13,30 +17,24 @@ import net.minecraftforge.registries.RegistryObject;
  * 只有在铁魔法模组加载时才会注册这些物品
  */
 public class MaidSpellItems {
-    
-    // 只有当铁魔法模组存在时才创建注册器
-    private static final DeferredRegister<Item> ITEMS = ModList.get().isLoaded("irons_spellbooks") 
-        ? DeferredRegister.create(ForgeRegistries.ITEMS, "touhou_little_maid_spell")
-        : null;
-    
-    // 法术强化核心 - 主饰品
-    public static final RegistryObject<Item> SPELL_ENHANCEMENT_CORE = ITEMS != null 
-        ? ITEMS.register("spell_enhancement_core", SpellEnhancementCore::new)
-        : null;
-    
+
+    private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, "touhou_little_maid_spell");
+
+    public static final RegistryObject<Item> SPELL_ENHANCEMENT_CORE = ITEMS.register("spell_enhancement_core", SpellEnhancementCore::new);
+    public static final RegistryObject<Item> BLEEDING_HEART = ITEMS.register("bleeding_heart", BleedingHeart::new);
+    public static final RegistryObject<Item> FLOW_CORE = ITEMS.register("flow_core", FlowCore::new);
+    public static final RegistryObject<Item> QUICK_CHANT_RING = ITEMS.register("quick_chant_ring", QuickChantRing::new);
+    public static final RegistryObject<Item> SPRING_RING = ITEMS.register("spring_ring", SpringRing::new);
+
     /**
-     * 注册物品（只在铁魔法模组存在时执行）
+     * 注册物品
      */
     public static void register(IEventBus eventBus) {
-        if (ITEMS != null) {
-            ITEMS.register(eventBus);
-        }
+        ITEMS.register(eventBus);
     }
-    
-    /**
-     * 检查铁魔法模组是否已加载
-     */
-    public static boolean isIronsSpellbooksLoaded() {
-        return ModList.get().isLoaded("irons_spellbooks");
+
+    public static String itemDesc(RegistryObject<Item> item) {
+        return Util.makeDescriptionId("item", item.getId());
     }
+
 } 

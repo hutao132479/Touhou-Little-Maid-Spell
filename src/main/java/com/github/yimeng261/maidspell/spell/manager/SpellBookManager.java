@@ -26,12 +26,12 @@ public class SpellBookManager {
     
     // 女仆管理器实例缓存 - 使用ConcurrentHashMap保证线程安全
     private static final Map<UUID, SpellBookManager> MAID_MANAGERS = new ConcurrentHashMap<>();
-    
-    // 全局提供者工厂注册表 - 存储提供者类的构造函数
-    private static final Map<String, Supplier<ISpellBookProvider>> PROVIDER_FACTORIES = new HashMap<>();
+
     
     // 实例相关的提供者列表 - 每个管理器可以有自己的提供者实例
     private static final List<ISpellBookProvider> instanceProviders = new ArrayList<>();
+
+    public static final List<String> loadedMods = new ArrayList<>();
     
     // 女仆实体存储为每个管理器的上下文
     private EntityMaid maid;
@@ -39,7 +39,6 @@ public class SpellBookManager {
     static {
         // 静态初始化：注册所有已知的提供者
         initializeProviderFactories();
-        createProviderInstances();
     }
 
     /**
@@ -49,22 +48,15 @@ public class SpellBookManager {
     private static void initializeProviderFactories() {
         LOGGER.info("Initializing spell book provider factories...");
 
-        registerProviderFactoryByClassName("irons_spellbooks", "IronsSpellbooksProvider", 
-            "com.github.yimeng261.maidspell.spell.providers.IronsSpellbooksProvider");
+        registerProviderFactoryByClassName("irons_spellbooks", "IronsSpellbooksProvider", com.github.yimeng261.maidspell.spell.providers.IronsSpellbooksProvider.class);
 
-        registerProviderFactoryByClassName("ars_nouveau", "ArsNouveauProvider",
-                "com.github.yimeng261.maidspell.spell.providers.ArsNouveauProvider");
+        registerProviderFactoryByClassName("ars_nouveau", "ArsNouveauProvider", com.github.yimeng261.maidspell.spell.providers.ArsNouveauProvider.class);
 
-        registerProviderFactoryByClassName("goety", "GoetyProvider",
-                "com.github.yimeng261.maidspell.spell.providers.GoetyProvider");
+        registerProviderFactoryByClassName("goety", "GoetyProvider", com.github.yimeng261.maidspell.spell.providers.GoetyProvider.class);
 
-        registerProviderFactoryByClassName("psi","PsiProvider",
-                "com.github.yimeng261.maidspell.spell.providers.PsiProvider");
+        registerProviderFactoryByClassName("psi","PsiProvider", com.github.yimeng261.maidspell.spell.providers.PsiProvider.class);
 
-        registerProviderFactoryByClassName("slashblade","SlashBladeProvider",
-                "com.github.yimeng261.maidspell.spell.providers.SlashBladeProvider");
-
-        LOGGER.info("Registered {} spell book provider factories", PROVIDER_FACTORIES.size());
+        registerProviderFactoryByClassName("slashblade","SlashBladeProvider", com.github.yimeng261.maidspell.spell.providers.SlashBladeProvider.class);
     }
     
     /**
@@ -73,74 +65,21 @@ public class SpellBookManager {
      * 
      * @param modId 模组ID
      * @param providerName 提供者名称（用于日志）
-     * @param className 提供者类的完整类名
+     * @param providerClass 提供者类
      */
-    private static void registerProviderFactoryByClassName(String modId, String providerName, String className) {
+    private static void registerProviderFactoryByClassName(String modId, String providerName, Class<?> providerClass) {
         try {
             // 检查模组是否加载
-            if (!ModList.get().isLoaded(modId)) {
-                LOGGER.debug("Mod {} not loaded, skipping {} registration", modId, providerName);
+            if (ModList.get().isLoaded(modId)) {
+                instanceProviders.add((ISpellBookProvider) providerClass.getConstructor().newInstance());
+                loadedMods.add(modId);
+                LOGGER.debug("Mod {} loaded, finished {} registration", modId, providerName);
                 return;
             }
-            
-            // 检查类是否可用 - 使用更安全的方式
-            Class<?> providerClass;
-            try {
-                providerClass = Class.forName(className);
-            } catch (ClassNotFoundException | NoClassDefFoundError e) {
-                LOGGER.warn("Provider class {} or its dependencies not found for mod {}, skipping registration: {}", 
-                           className, modId, e.getMessage());
-                return;
-            }
-
-
-            Supplier<ISpellBookProvider> factory = () -> {
-                try {
-                    return (ISpellBookProvider) providerClass.getConstructor().newInstance();
-                } catch (Exception e) {
-                    LOGGER.error("Failed to create instance of {}: {}", className, e.getMessage());
-                    return null;
-                }
-            };
-            
-            // 注册工厂
-            PROVIDER_FACTORIES.put(modId, factory);
-            LOGGER.info("Registered spell book provider factory: {} for mod {}", providerName, modId);
             
         } catch (Exception e) {
             LOGGER.error("Failed to register provider factory for mod {}: {}", modId, e.getMessage());
         }
-    }
-    
-    
-    /**
-     * 动态注册外部提供者工厂
-     * 允许其他模组在运行时注册自己的提供者
-     * 
-     * @param modId 模组ID
-     * @param factory 提供者工厂函数
-     * @return 如果注册成功返回true，否则返回false
-     */
-    public static boolean registerExternalProviderFactory(String modId, Supplier<ISpellBookProvider> factory) {
-        if (modId == null || factory == null) {
-            LOGGER.warn("Cannot register external provider factory: modId or factory is null");
-            return false;
-        }
-        
-        if (PROVIDER_FACTORIES.containsKey(modId)) {
-            LOGGER.warn("Provider factory for mod {} already exists, overriding", modId);
-        }
-        
-        PROVIDER_FACTORIES.put(modId, factory);
-        LOGGER.info("Registered external spell book provider factory for mod {}", modId);
-        return true;
-    }
-    
-    /**
-     * 获取所有注册的提供者模组ID列表
-     */
-    public static List<String> getRegisteredProviderMods() {
-        return new ArrayList<>(PROVIDER_FACTORIES.keySet());
     }
 
     /**
@@ -149,42 +88,7 @@ public class SpellBookManager {
     private SpellBookManager(EntityMaid maid) {
         this.maid = maid;
     }
-    
-    /**
-     * 创建所有可用的提供者实例
-     */
-    private static void createProviderInstances() {
-        for (Map.Entry<String, Supplier<ISpellBookProvider>> entry : PROVIDER_FACTORIES.entrySet()) {
-            String modId = entry.getKey();
-            Supplier<ISpellBookProvider> factory = entry.getValue();
-            
-            try {
-                // 再次检查模组是否加载（防止运行时模组被卸载）
-                if (!ModList.get().isLoaded(modId)) {
-                    LOGGER.debug("Mod {} not loaded, skipping provider creation", modId);
-                    continue;
-                }
-                
-                // 创建提供者实例
-                ISpellBookProvider provider = factory.get();
-                if (provider != null) {
-                    instanceProviders.add(provider);
-                    LOGGER.debug("Created provider instance: {} for mod {}", 
-                               provider.getClass().getSimpleName(), modId);
-                } else {
-                    LOGGER.warn("Provider factory for mod {} returned null", modId);
-                }
-                
-            } catch (NoClassDefFoundError e) {
-                LOGGER.warn("Failed to create provider instance for mod {} due to missing class dependencies: {}", 
-                           modId, e.getMessage());
-            } catch (Exception e) {
-                LOGGER.error("Failed to create provider instance for mod {}: {}", modId, e.getMessage(), e);
-            }
-        }
-        
-        LOGGER.info("Created {} provider instances", instanceProviders.size());
-    }
+
     
     /**
      * 获取或创建女仆的管理器实例

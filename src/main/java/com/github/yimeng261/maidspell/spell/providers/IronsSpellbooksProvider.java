@@ -33,7 +33,6 @@ import com.mojang.logging.LogUtils;
  * 铁魔法模组的法术书提供者 - 单例版本
  * 包含完整的施法逻辑，支持持续性法术和复杂的冷却系统
  * 通过 MaidIronsSpellData 管理各女仆的数据
- * 
  * 支持的法术容器类型：
  * - SpellBook: 法术书
  * - StaffItem: 法杖（继承自CastingItem）
@@ -92,11 +91,7 @@ public class IronsSpellbooksProvider implements ISpellBookProvider {
         }
         
         // 检查是否包含法术容器数据（通用检查）
-        if (ISpellContainer.isSpellContainer(itemStack)) {
-            return true;
-        }
-        
-        return false;
+        return ISpellContainer.isSpellContainer(itemStack);
     }
 
     /**
@@ -124,21 +119,7 @@ public class IronsSpellbooksProvider implements ISpellBookProvider {
      */
     @Override
     public void setSpellBook(EntityMaid maid, ItemStack spellBook) {
-        String itemType = "unknown";
-        if (spellBook != null && !spellBook.isEmpty()) {
-            if (spellBook.getItem() instanceof SpellBook) {
-                itemType = "SpellBook";
-            } else if (spellBook.getItem() instanceof MagicSwordItem) {
-                itemType = "MagicSword";
-            } else if (spellBook.getItem() instanceof StaffItem) {
-                itemType = "Staff";
-            } else if (spellBook.getItem() instanceof CastingItem) {
-                itemType = "CastingItem";
-            } else if (ISpellContainer.isSpellContainer(spellBook)) {
-                itemType = "SpellContainer";
-            }
-        }
-        
+
         MaidIronsSpellData data = getData(maid);
         if (data != null) {
             // 根据物品类型分别存储到不同的槽位
@@ -153,24 +134,10 @@ public class IronsSpellbooksProvider implements ISpellBookProvider {
                     // 其他类型默认存储为法术书
                     data.setSpellBook(spellBook);
                 }
-            } else {
-                // 如果传入null或空物品，清除所有法术容器
-                clearAllSpellContainers(maid);
             }
         }
     }
-    
-    /**
-     * 清除所有法术容器
-     */
-    private void clearAllSpellContainers(EntityMaid maid) {
-        MaidIronsSpellData data = getData(maid);
-        if (data != null) {
-            data.setSpellBook(ItemStack.EMPTY);
-            data.setMagicSword(ItemStack.EMPTY);
-            data.setStaff(ItemStack.EMPTY);
-        }
-    }
+
     
     /**
      * 检查是否正在施法
@@ -236,7 +203,6 @@ public class IronsSpellbooksProvider implements ISpellBookProvider {
         
         try {
             AbstractSpell spell = spellData.getSpell();
-            String spellId = spell.getSpellId();
             
             // 确保女仆面向目标（特别是对于投射法术）
             LivingEntity target = data.getTarget();
@@ -283,7 +249,7 @@ public class IronsSpellbooksProvider implements ISpellBookProvider {
     @Override
     public void processContinuousCasting(EntityMaid maid) {
         MaidIronsSpellData data = getData(maid);
-        if (data == null || !data.isCasting() || data.getCurrentCastingSpell() == null || maid == null) {
+        if (data == null || !data.isCasting() || data.getCurrentCastingSpell() == null) {
             return;
         }
         
@@ -386,7 +352,7 @@ public class IronsSpellbooksProvider implements ISpellBookProvider {
         int cooldownTicks = (int)(spell.getSpellCooldown() * (2 - Utils.softCapFormula(cooldownModifier)));
         String spellId = spell.getSpellId();
 
-        data.setSpellCooldown(spellId, cooldownTicks);
+        data.setSpellCooldown(spellId, cooldownTicks, maid);
         
     }
     

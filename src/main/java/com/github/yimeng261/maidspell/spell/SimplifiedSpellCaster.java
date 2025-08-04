@@ -31,7 +31,6 @@ public class SimplifiedSpellCaster {
     public SimplifiedSpellCaster(EntityMaid maid) {
         this.maid = maid;
         this.spellBookManager = SpellBookManager.getOrCreateManager(maid);
-        LOGGER.debug("maidMeleeRange: {}", MELEE_RANGE);
     }
     
     /**
