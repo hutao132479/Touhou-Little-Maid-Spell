@@ -1,6 +1,8 @@
 package com.github.yimeng261.maidspell.spell.providers;
 
+import com.hollingsworth.arsnouveau.api.item.inv.CombinedHandlerInv;
 import com.mojang.datafixers.util.Pair;
+import net.minecraftforge.items.wrapper.CombinedInvWrapper;
 import org.slf4j.Logger;
 import com.github.yimeng261.maidspell.api.ISpellBookProvider;
 import com.github.yimeng261.maidspell.spell.data.MaidGoetySpellData;
@@ -554,6 +556,9 @@ public class GoetyProvider implements ISpellBookProvider {
     private void ensureWandEquipped(EntityMaid maid) {
         MaidGoetySpellData data = getData(maid);
         if (data == null) return;
+        if (!isSpellBook(data.getSpellBook())){
+            return;
+        }
 
         ItemStack mainHandItem = maid.getMainHandItem();
         ItemStack originalOffHand = maid.getOffhandItem();
@@ -568,34 +573,20 @@ public class GoetyProvider implements ISpellBookProvider {
         maid.startUsingItem(wandHand);
     }
     
-    private void swapItem(EntityMaid maid, ItemStack targetItem, ItemStack sourceItem) {
+    private void swapItem(EntityMaid maid, ItemStack spellBook, ItemStack handItem) {
         if (maid == null) return;
-        
-        if (targetItem == null) targetItem = ItemStack.EMPTY;
-        if (sourceItem == null) sourceItem = ItemStack.EMPTY;
-        
-        int ti = -1, si = -1;
-        var availableInv = maid.getAvailableInv(true);
+
+        CombinedInvWrapper availableInv = maid.getAvailableInv(true);
         
         for (int i = 0; i < availableInv.getSlots(); i++) {
             ItemStack stackInSlot = availableInv.getStackInSlot(i);
-            if (ItemStack.isSameItemSameTags(stackInSlot, sourceItem)) {
-                si = i;
-            }
-            if (ItemStack.isSameItemSameTags(stackInSlot, targetItem)) {
-                ti = i;
-            }
-            if (ti != -1 && si != -1) {
+            if (ItemStack.isSameItemSameTags(stackInSlot, spellBook)) {
+                availableInv.setStackInSlot(i, handItem);
                 break;
             }
         }
-        
-        if (ti != -1) {
-            availableInv.setStackInSlot(ti, sourceItem);
-        }
-        if (si != -1) {
-            availableInv.setStackInSlot(si, targetItem);
-        }
+
+        maid.setItemInHand(InteractionHand.OFF_HAND, spellBook);
     }
     
     private void completeCasting(EntityMaid maid) {
