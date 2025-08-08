@@ -1,7 +1,13 @@
 {
   "task.maidspell.spell_combat": "Spell Combat",
+  "task.maidspell.spell_combat_far": "Ranged Spell Combat",
+  "task.maidspell.spell_combat_melee": "Melee Spell Combat",
   "task.maidspell.spell_combat.desc": "Maid uses equipped spell books to cast spells in combat. Supports spell books in offhand, mainhand or backpack.",
+  "task.maidspell.spell_combat_far.desc": "Maid uses equipped spell books for ranged spell attacks. Supports spell books in offhand, mainhand or backpack.",
+  "task.maidspell.spell_combat_melee.desc": "Maid uses equipped spell books for melee spell attacks. Supports spell books in offhand, mainhand or backpack.",
   "task.maidspell.spell_combat.condition.spell_book": "Requires spell book (offhand, mainhand or backpack)",
+  "task.maidspell.spell_combat_far.condition.spell_book": "Requires spell book (offhand, mainhand or backpack)",
+  "task.maidspell.spell_combat_melee.condition.spell_book": "Requires spell book (offhand, mainhand or backpack)",
   "item.maidspell.spell_book": "Spell Book",
   "item.touhou_little_maid_spell.spell_enhancement_core": "Spell Enhancement Core",
   "item.maidspell.spell_enhancement_core.desc1": "Magical Resonance Device",
@@ -18,6 +24,10 @@
   "item.maidspell.flow_core.desc3": "Reduces damage taken, damage reduction scales with favorability",
   "itemGroup.touhou_little_maid_spell": "Touhou Little Maid: Spell",
   "item.touhou_little_maid_spell.quick_chant_ring": "Quick-Chant Ring",
-  "item.maidspell.quick_chant_ring.desc1": "Why is the Quick-Chant Ring reducing Cooldown?" ,
-  "item.maidspell.quick_chant_ring.desc2": "Maid reduces the cooldown of spells by 25% per level of Favor"
+  "item.maidspell.quick_chant_ring.desc1": "Why is the Quick-Chant Ring reducing Cooldown?",
+  "item.maidspell.quick_chant_ring.desc2": "Maid reduces the cooldown of spells by 25% per level of Favor",
+  "item.touhou_little_maid_spell.spring_ring": "Spring Ring",
+  "item.maidspell.spring_ring.desc1": "Why not call it Rage Ring (?)",
+  "item.maidspell.spring_ring.desc2": "Increases damage based on maid's missing health percentage",
+  "item.maidspell.spring_ring.desc3": "Maximum 50% damage increase"
 }

@@ -2,9 +2,9 @@ Manifest-Version: 1.0
 Specification-Title: touhou_little_maid_spell
 Specification-Vendor: dreamCat
 Specification-Version: 1
-Implementation-Title: forge-1.20.1-47.4.0-mdk
+Implementation-Title: MaidSpell
 Implementation-Version: 1.4.5
 Implementation-Vendor: dreamCat
-Implementation-Timestamp: 2025-08-04T11:54:52+0800
+Implementation-Timestamp: 2025-08-08T17:27:59+0800
 MixinConfigs: maidcurios.mixins.json
 

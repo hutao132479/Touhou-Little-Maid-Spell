@@ -1,6 +1,6 @@
 package com.github.yimeng261.maidspell;
 
-import com.github.yimeng261.maidspell.task.SpellCombatTask;
+import com.github.yimeng261.maidspell.task.SpellCombatMeleeTask;
 import com.github.yimeng261.maidspell.event.MaidSpellEventHandler;
 import com.github.yimeng261.maidspell.item.MaidSpellItems;
 import com.github.yimeng261.maidspell.item.MaidSpellCreativeTab;
@@ -19,7 +19,7 @@ public class MaidSpellMod {
     public static final String MOD_NAME = "Touhou Little Maid: Spell";
     
     private static final Logger LOGGER = LoggerFactory.getLogger(MOD_NAME);
-    public static final SpellCombatTask SPELL_COMBAT_TASK = new SpellCombatTask();
+    public static final SpellCombatMeleeTask SPELL_COMBAT_TASK = new SpellCombatMeleeTask();
     
 
     public MaidSpellMod() {

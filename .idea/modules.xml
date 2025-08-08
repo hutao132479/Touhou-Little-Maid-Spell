@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/forge-1.20.1-47.4.0-mdk.main.iml" filepath="$PROJECT_DIR$/.idea/modules/forge-1.20.1-47.4.0-mdk.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MaidSpell.main.iml" filepath="$PROJECT_DIR$/.idea/modules/MaidSpell.main.iml" />
     </modules>
   </component>
 </project>
