@@ -30,14 +30,14 @@ public class BleedingHeart extends Item {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
-        super.appendHoverText(stack, level, tooltip, flag);
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
 
-        tooltip.add(Component.translatable("item.maidspell.bleeding_heart.desc1")
+        tooltipComponents.add(Component.translatable("item.maidspell.bleeding_heart.desc1")
             .withStyle(ChatFormatting.GRAY));
-        tooltip.add(Component.translatable("item.maidspell.bleeding_heart.desc2")
+        tooltipComponents.add(Component.translatable("item.maidspell.bleeding_heart.desc2")
             .withStyle(ChatFormatting.BLUE));
-        tooltip.add(Component.translatable("item.maidspell.bleeding_heart.desc3")
+        tooltipComponents.add(Component.translatable("item.maidspell.bleeding_heart.desc3")
             .withStyle(ChatFormatting.YELLOW));
     }
 } 

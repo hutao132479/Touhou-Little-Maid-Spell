@@ -9,8 +9,6 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.common.util.FakePlayer;
-import net.minecraftforge.common.util.FakePlayerFactory;
 
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.cad.ICAD;
@@ -111,17 +109,21 @@ public class PsiProvider implements ISpellBookProvider {
             return false;
         }
 
-        ItemStack cad = data.getSpellBook();
-        if (cad.isEmpty() || !(cad.getItem() instanceof ICAD)) {
+        if(!isSpellBook(data.getSpellBook())) {
             return false;
         }
 
+        ItemStack cad = data.getSpellBook();
+
         // 获取CAD的可插拔组件
-        ISocketable sockets = cad.getCapability(PsiAPI.SOCKETABLE_CAPABILITY).orElse(null);
+        ISocketable sockets = cad.getCapability(PsiAPI.SOCKETABLE_CAPABILITY);
 
         // 从弹夹中随机选择一个有效的法术弹
-        ItemStack bullet = getRandomBulletFromMagazine(sockets, maid);
-        if (bullet.isEmpty() || !ISpellAcceptor.hasSpell(bullet)) {
+        ItemStack bullet = null;
+        if (sockets != null) {
+            bullet = getRandomBulletFromMagazine(sockets, maid);
+        }
+        if (bullet != null && (bullet.isEmpty() || !ISpellAcceptor.hasSpell(bullet))) {
             return false;
         }
 
@@ -274,7 +276,7 @@ public class PsiProvider implements ISpellBookProvider {
         if (maid.level() instanceof ServerLevel serverLevel) {
             try {
                 // 创建一个专门用于女仆施法的虚假玩家
-                FakePlayer fakePlayer = FakePlayerFactory.get(serverLevel, 
+                net.neoforged.neoforge.common.util.FakePlayer fakePlayer = net.neoforged.neoforge.common.util.FakePlayerFactory.get(serverLevel, 
                     new com.mojang.authlib.GameProfile(
                         java.util.UUID.randomUUID(), 
                         "MaidCaster_" + maid.getUUID().toString().substring(0, 8)

@@ -6,7 +6,7 @@ import com.github.yimeng261.maidspell.spell.data.MaidIronsSpellData;
 
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
-import io.redspace.ironsspellbooks.api.spells.SpellData;
+import io.redspace.ironsspellbooks.api.spells.SpellSlot;
 import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
 import io.redspace.ironsspellbooks.api.spells.CastSource;
 import io.redspace.ironsspellbooks.api.spells.CastType;
@@ -22,9 +22,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 
-import java.util.Arrays;
 import java.util.ArrayList;
-import java.util.List;
 
 import org.slf4j.Logger;
 import com.mojang.logging.LogUtils;
@@ -165,15 +163,15 @@ public class IronsSpellbooksProvider implements ISpellBookProvider {
         
 
         // 尝试施放可用的法术
-        List<SpellData> availableSpells = new ArrayList<>();
-        for(ItemStack container : data.getAllSpellContainers()){
+        ArrayList<SpellSlot> availableSpells = new ArrayList<>();
+        data.getAllSpellContainers().forEach(container->{
             ISpellContainer spellContainer = ISpellContainer.get(container);
-            if(!spellContainer.isEmpty()){
-                availableSpells.addAll(Arrays.asList(spellContainer.getAllSpells()));
+            if(spellContainer!=null && !spellContainer.isEmpty()){
+                availableSpells.addAll(spellContainer.getActiveSpells());
             }
-        }
-        
-        availableSpells.removeIf(spellData -> spellData == null || data.isSpellOnCooldown(spellData.getSpell().getSpellId()));
+        });
+
+        availableSpells.removeIf(SpellSlot -> SpellSlot == null || data.isSpellOnCooldown(SpellSlot.getSpell().getSpellId()));
 
         if (availableSpells.isEmpty()) {
             return false;
@@ -181,9 +179,9 @@ public class IronsSpellbooksProvider implements ISpellBookProvider {
 
         // 随机选择一个可用的法术
         int index = (int) (Math.random() * availableSpells.size());
-        SpellData spellData = availableSpells.get(index);
-        if (!data.isSpellOnCooldown(spellData.getSpell().getSpellId())) {
-            return initiateCasting(maid, spellData);
+        SpellSlot spellSlot = availableSpells.get(index);
+        if (!data.isSpellOnCooldown(spellSlot.getSpell().getSpellId())) {
+            return initiateCasting(maid, spellSlot);
         }
 
         return false;
@@ -192,9 +190,9 @@ public class IronsSpellbooksProvider implements ISpellBookProvider {
     /**
      * 开始施法特定法术
      */
-    private boolean initiateCasting(EntityMaid maid, SpellData spellData) {
+    private boolean initiateCasting(EntityMaid maid, SpellSlot spellSlot) {
         MaidIronsSpellData data = getData(maid);
-        if (spellData == null || spellData.getSpell() == null || maid == null || data == null) {
+        if (spellSlot == null || spellSlot.getSpell() == null || maid == null || data == null) {
             return false;
         }
         if (data.isCasting()) {
@@ -202,7 +200,7 @@ public class IronsSpellbooksProvider implements ISpellBookProvider {
         }
         
         try {
-            AbstractSpell spell = spellData.getSpell();
+            AbstractSpell spell = spellSlot.getSpell();
             
             // 确保女仆面向目标（特别是对于投射法术）
             LivingEntity target = data.getTarget();
@@ -213,24 +211,24 @@ public class IronsSpellbooksProvider implements ISpellBookProvider {
             }
             
             // 设置目标相关的施法数据（在checkPreCastConditions之前）
-            setupSpellTargetData(maid, spell, spellData.getLevel());
+            setupSpellTargetData(maid, spell, spellSlot.getLevel());
             
             MagicData magicData = data.getMagicData();
             
             // 检查前置条件
-            if (!spell.checkPreCastConditions(maid.level(), spellData.getLevel(), maid, magicData)) {
+            if (!spell.checkPreCastConditions(maid.level(), spellSlot.getLevel(), maid, magicData)) {
                 return false;
             }
             
-            int effectiveCastTime = spell.getEffectiveCastTime(spellData.getLevel(), maid);
+            int effectiveCastTime = spell.getEffectiveCastTime(spellSlot.getLevel(), maid);
             CastSource castSource = getCastSource(data.getSpellBook());
-            magicData.initiateCast(spell, spellData.getLevel(), effectiveCastTime, castSource, "offhand");
+            magicData.initiateCast(spell, spellSlot.getLevel(), effectiveCastTime, castSource, "offhand");
             
             // 调用施法前处理
-            spell.onServerPreCast(maid.level(), spellData.getLevel(), maid, magicData);
+            spell.onServerPreCast(maid.level(), spellSlot.getLevel(), maid, magicData);
             
             // 设置当前施法状态
-            data.setCurrentCastingSpell(spellData);
+            data.setCurrentCastingSpell(spellSlot);
             data.setCasting(true);
             maid.swing(maid.getUsedItemHand());
             
@@ -348,7 +346,7 @@ public class IronsSpellbooksProvider implements ISpellBookProvider {
         MaidIronsSpellData data = getData(maid);
         if (data == null || spell == null) return;
         
-        double cooldownModifier = maid.getAttributeValue(AttributeRegistry.COOLDOWN_REDUCTION.get());
+        double cooldownModifier = maid.getAttributeValue(AttributeRegistry.COOLDOWN_REDUCTION);
         int cooldownTicks = (int)(spell.getSpellCooldown() * (2 - Utils.softCapFormula(cooldownModifier)));
         String spellId = spell.getSpellId();
 

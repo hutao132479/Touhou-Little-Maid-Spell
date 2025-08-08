@@ -1,12 +1,12 @@
 package com.github.yimeng261.maidspell.spell.data;
 
 import com.github.yimeng261.maidspell.api.AbstractSpellData;
-import com.hollingsworth.arsnouveau.api.spell.ISpellCaster;
+import com.hollingsworth.arsnouveau.api.spell.AbstractCaster;
 import com.hollingsworth.arsnouveau.api.spell.Spell;
 import com.github.tartaricacid.touhoulittlemaid.entity.passive.EntityMaid;
-import io.redspace.ironsspellbooks.api.spells.SpellData;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import com.hollingsworth.arsnouveau.api.spell.SpellCaster;
 
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -24,7 +24,7 @@ public class MaidArsNouveauSpellData extends AbstractSpellData {
     // === 施法状态 ===
     private int castingTicks = 0;
     private Spell currentSpell = null;
-    private ISpellCaster currentCaster = null;
+    private AbstractCaster<?> currentCaster = null;
     
     // === 施法参数 ===
     private static final int CASTING_DURATION = 10; // 新生魔艺法术施法时间（tick）
@@ -83,11 +83,11 @@ public class MaidArsNouveauSpellData extends AbstractSpellData {
         this.currentSpell = spell;
     }
     
-    public ISpellCaster getCurrentCaster() {
+    public AbstractCaster<?> getCurrentCaster() {
         return currentCaster;
     }
     
-    public void setCurrentCaster(ISpellCaster caster) {
+    public void setCurrentCaster(AbstractCaster<?> caster) {
         this.currentCaster = caster;
     }
     

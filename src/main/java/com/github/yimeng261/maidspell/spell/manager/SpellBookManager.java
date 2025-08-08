@@ -4,10 +4,11 @@ import com.github.tartaricacid.touhoulittlemaid.entity.passive.EntityMaid;
 import com.github.yimeng261.maidspell.api.ISpellBookProvider;
 
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.fml.ModList;
+import net.neoforged.fml.ModList;
+import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
+
 import org.slf4j.Logger;
 import com.mojang.logging.LogUtils;
-import net.minecraftforge.items.wrapper.CombinedInvWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,11 +53,8 @@ public class SpellBookManager {
 
         registerProviderFactoryByClassName("ars_nouveau", "ArsNouveauProvider", com.github.yimeng261.maidspell.spell.providers.ArsNouveauProvider.class);
 
-        registerProviderFactoryByClassName("goety", "GoetyProvider", com.github.yimeng261.maidspell.spell.providers.GoetyProvider.class);
-
         registerProviderFactoryByClassName("psi","PsiProvider", com.github.yimeng261.maidspell.spell.providers.PsiProvider.class);
 
-        registerProviderFactoryByClassName("slashblade","SlashBladeProvider", com.github.yimeng261.maidspell.spell.providers.SlashBladeProvider.class);
     }
     
     /**

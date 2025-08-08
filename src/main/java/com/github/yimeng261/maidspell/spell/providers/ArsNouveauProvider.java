@@ -4,12 +4,8 @@ import com.github.tartaricacid.touhoulittlemaid.entity.passive.EntityMaid;
 import com.github.yimeng261.maidspell.api.ISpellBookProvider;
 import com.github.yimeng261.maidspell.spell.data.MaidArsNouveauSpellData;
 
+import com.hollingsworth.arsnouveau.api.spell.*;
 import com.hollingsworth.arsnouveau.common.items.SpellBook;
-import com.hollingsworth.arsnouveau.api.util.CasterUtil;
-import com.hollingsworth.arsnouveau.api.spell.ISpellCaster;
-import com.hollingsworth.arsnouveau.api.spell.Spell;
-import com.hollingsworth.arsnouveau.api.spell.SpellResolver;
-import com.hollingsworth.arsnouveau.api.spell.SpellContext;
 import com.hollingsworth.arsnouveau.api.spell.wrapped_caster.LivingCaster;
 import com.hollingsworth.arsnouveau.api.util.SpellUtil;
 import com.hollingsworth.arsnouveau.api.mana.IManaCap;
@@ -17,6 +13,7 @@ import com.hollingsworth.arsnouveau.setup.registry.CapabilityRegistry;
 import com.hollingsworth.arsnouveau.common.spell.augment.AugmentSensitive;
 import com.hollingsworth.arsnouveau.common.spell.method.MethodProjectile;
 import com.hollingsworth.arsnouveau.common.entity.EntityProjectileSpell;
+
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.InteractionHand;
@@ -24,7 +21,7 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.sounds.SoundSource;
+
 
 import org.slf4j.Logger;
 import com.mojang.logging.LogUtils;
@@ -100,7 +97,7 @@ public class ArsNouveauProvider implements ISpellBookProvider {
             data.setSpellBook(spellBook);
             // 重置施法器缓存
             if (isSpellBook(spellBook)) {
-                ISpellCaster caster = CasterUtil.getCaster(spellBook);
+                AbstractCaster<?> caster = ((SpellBook)spellBook.getItem()).getSpellCaster(spellBook);
                 data.setCurrentCaster(caster);
             } else {
                 data.setCurrentCaster(null);
@@ -147,7 +144,7 @@ public class ArsNouveauProvider implements ISpellBookProvider {
         data.setCasting(true);
         data.setCastingTicks(0);
         data.setCurrentSpell(spell);
-        data.setSpellCooldown(spell.name,spell.getCost(),maid);
+        data.setSpellCooldown(spell.name(),spell.getCost(),maid);
         
         // 播放手臂挥舞动画
         maid.swing(InteractionHand.MAIN_HAND);
@@ -226,13 +223,9 @@ public class ArsNouveauProvider implements ISpellBookProvider {
      */
     private void ensureManaCapability(EntityMaid maid) {
         if (maid != null) {
-            var manaOpt = CapabilityRegistry.getMana(maid);
-            if (manaOpt.isPresent()) {
-                IManaCap manaCap = manaOpt.orElse(null);
-                // 设置女仆有足够的魔力
-                if (manaCap.getCurrentMana() < 1000) {
-                    manaCap.setMana(1000.0); // 给女仆1000点魔力
-                }
+            IManaCap manaCap = CapabilityRegistry.getMana(maid);
+            if(manaCap != null && manaCap.getCurrentMana() < 1000) {
+                manaCap.setMana(1000.0);
             }
         }
     }
@@ -243,7 +236,7 @@ public class ArsNouveauProvider implements ISpellBookProvider {
      */
     private List<Spell> getAvailableSpells(MaidArsNouveauSpellData data) {
         List<Spell> availableSpells = new ArrayList<>();
-        ISpellCaster caster = data.getCurrentCaster();
+        AbstractCaster<?> caster = data.getCurrentCaster();
         if (caster == null) {
             return availableSpells;
         }
@@ -251,7 +244,7 @@ public class ArsNouveauProvider implements ISpellBookProvider {
         // 遍历法术书的所有槽位
         for (int i = 0; i < caster.getMaxSlots(); i++) {
             Spell spell = caster.getSpell(i);
-            if (spell.isValid() && !spell.isEmpty() && !data.isSpellOnCooldown(spell.name)) {
+            if (spell.isValid() && !spell.isEmpty() && !data.isSpellOnCooldown(spell.name())) {
                 availableSpells.add(spell);
             }
         }
@@ -370,18 +363,11 @@ public class ArsNouveauProvider implements ISpellBookProvider {
                     castSuccess = resolver.onCast(data.getSpellBook(), maid.level());
                 }
             }
-            
-            if (castSuccess) {
-                // 播放音效
-                if (data.getCurrentSpell().sound != null && data.getCurrentSpell().sound.sound != null) {
-                    maid.level().playSound(null, 
-                        maid.getX(), maid.getY(), maid.getZ(),
-                        data.getCurrentSpell().sound.sound.getSoundEvent(),
-                        SoundSource.NEUTRAL,
-                        data.getCurrentSpell().sound.volume,
-                        data.getCurrentSpell().sound.pitch);
-                }
-            }   
+
+            if(castSuccess){
+                return;
+            }
+
         } catch (Exception ignored) {
         } finally {
             // 重置施法状态

@@ -25,14 +25,14 @@ public class FlowCore extends Item {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
-        super.appendHoverText(stack, level, tooltip, flag);
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
 
-        tooltip.add(Component.translatable("item.maidspell.flow_core.desc1")
+        tooltipComponents.add(Component.translatable("item.maidspell.flow_core.desc1")
                 .withStyle(ChatFormatting.GRAY));
-        tooltip.add(Component.translatable("item.maidspell.flow_core.desc2")
+        tooltipComponents.add(Component.translatable("item.maidspell.flow_core.desc2")
                 .withStyle(ChatFormatting.BLUE));
-        tooltip.add(Component.translatable("item.maidspell.flow_core.desc3")
+        tooltipComponents.add(Component.translatable("item.maidspell.flow_core.desc3")
                 .withStyle(ChatFormatting.YELLOW));
     }
 }

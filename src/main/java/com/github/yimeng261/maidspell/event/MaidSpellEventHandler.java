@@ -8,32 +8,26 @@ import com.github.yimeng261.maidspell.spell.manager.BaubleStateManager;
 import com.github.yimeng261.maidspell.spell.manager.SpellBookManager;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.player.Player;
-import net.minecraftforge.event.entity.EntityJoinLevelEvent;
-import net.minecraftforge.event.entity.EntityLeaveLevelEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
+import net.neoforged.neoforge.event.entity.EntityLeaveLevelEvent;
+import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
+
 import org.slf4j.Logger;
 import com.mojang.logging.LogUtils;
 import com.github.yimeng261.maidspell.MaidSpellMod;
 import com.github.yimeng261.maidspell.api.ISpellBookProvider;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.event.AttachCapabilitiesEvent;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
 
-// SlashBlade相关导入
-import mods.flammpfeil.slashblade.capability.inputstate.InputStateCapabilityProvider;
-
-import java.lang.reflect.InvocationTargetException;
 import java.util.function.BiFunction;
-import java.util.function.Function;
+
 
 /**
  * 女仆法术事件处理器
  * 处理女仆生命周期相关的法术管理事件
  */
-@Mod.EventBusSubscriber(modid = MaidSpellMod.MOD_ID)
+@EventBusSubscriber(modid = MaidSpellMod.MOD_ID)
 public class MaidSpellEventHandler {
     private static final Logger LOGGER = LogUtils.getLogger();
 
@@ -113,7 +107,7 @@ public class MaidSpellEventHandler {
     }
 
     @SubscribeEvent
-    public static void onEntityHurt(LivingHurtEvent event) {
+    public static void onEntityHurt(LivingIncomingDamageEvent event) {
         Entity entity = event.getEntity();
         Entity direct = event.getSource().getDirectEntity();
         Entity source = event.getSource().getEntity();
@@ -127,54 +121,19 @@ public class MaidSpellEventHandler {
             Global.common_hurtProcessors.forEach(function -> function.apply(event, maid));
 
             BaubleStateManager.getBaubles(maid).forEach(bauble->{
-                BiFunction<LivingHurtEvent, EntityMaid, Void> func = Global.bauble_hurtProcessors.getOrDefault(bauble.getDescriptionId(), (livingHurtEvent, entityMaid) -> null);
+                BiFunction<LivingIncomingDamageEvent, EntityMaid, Void> func = Global.bauble_hurtProcessors.getOrDefault(bauble.getDescriptionId(), (LivingIncomingDamageEvent, entityMaid) -> null);
                 func.apply(event, maid);
             });
         }
     }
 
-    private static void processor(LivingHurtEvent event, EntityMaid maid) {
+    private static void processor(LivingIncomingDamageEvent event, EntityMaid maid) {
         Global.common_damageProcessors.forEach(function -> function.apply(event, maid));
 
         BaubleStateManager.getBaubles(maid).forEach(bauble->{
-            BiFunction<LivingHurtEvent, EntityMaid, Void> func = Global.bauble_damageProcessors.getOrDefault(bauble.getDescriptionId(), (livingHurtEvent, entityMaid) -> null);
+            BiFunction<LivingIncomingDamageEvent, EntityMaid, Void> func = Global.bauble_damageProcessors.getOrDefault(bauble.getDescriptionId(), (LivingIncomingDamageEvent, entityMaid) -> null);
             func.apply(event, maid);
         });
-    }
-
-    /**
-     * 为女仆附加INPUT_STATE能力，确保拔刀剑能正常工作
-     * 使用不同的键名以避免与拔刀剑模组的能力冲突
-     */
-    @SubscribeEvent
-    public static void onAttachCapabilities(AttachCapabilitiesEvent<Entity> event) {
-        // 只在服务器端处理，避免客户端渲染问题
-        if (event.getObject().level().isClientSide()) {
-            return;
-        }
-        
-        if (event.getObject() instanceof EntityMaid) {
-            // 检查拔刀剑模组是否加载
-            if (!net.minecraftforge.fml.ModList.get().isLoaded("slashblade")) {
-                return;
-            }
-            
-            Entity entity = event.getObject();
-            
-            // 使用我们自己的键名，以防拔刀剑的能力没有正确附加
-            ResourceLocation maidInputStateKey = new ResourceLocation(MaidSpellMod.MOD_ID, "maid_inputstate");
-            
-            try {
-                // 检查是否已经有这个能力，避免重复添加
-                if (!entity.getCapability(mods.flammpfeil.slashblade.capability.inputstate.CapabilityInputState.INPUT_STATE).isPresent()) {
-                    event.addCapability(maidInputStateKey, new InputStateCapabilityProvider());
-                    LOGGER.debug("Added INPUT_STATE capability to maid entity");
-                }
-            } catch (Exception e) {
-                LOGGER.warn("Failed to add INPUT_STATE capability to maid: {}", e.getMessage());
-                // 不要重新抛出异常，避免影响其他模组
-            }
-        }
     }
 
     /**
@@ -202,9 +161,6 @@ public class MaidSpellEventHandler {
                     }
                 }
             }
-            
-            // 清理特定模组的数据
-            com.github.yimeng261.maidspell.spell.data.MaidSlashBladeData.remove(maid.getUUID());
             
             // 移除女仆的管理器
             SpellBookManager.removeManager(maid);

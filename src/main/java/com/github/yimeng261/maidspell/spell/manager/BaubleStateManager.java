@@ -12,8 +12,6 @@ import org.slf4j.Logger;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static com.github.tartaricacid.touhoulittlemaid.item.bauble.BaubleManager.getBauble;
-
 /**
  * 饰品状态管理器
  * 定期检测女仆饰品的变化，特别是法术增强饰品的卸下

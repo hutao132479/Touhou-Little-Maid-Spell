@@ -1,6 +1,5 @@
 package com.github.yimeng261.maidspell.task;
 
-import com.github.yimeng261.maidspell.Config;
 import com.github.yimeng261.maidspell.spell.SimplifiedSpellCaster;
 import com.github.tartaricacid.touhoulittlemaid.api.task.IRangedAttackTask;
 import com.github.tartaricacid.touhoulittlemaid.api.task.IAttackTask;
@@ -42,7 +41,7 @@ import java.util.function.Predicate;
  */
 public class SpellCombatTask implements IRangedAttackTask {
     private static final Logger LOGGER = LogUtils.getLogger();
-    public static final ResourceLocation UID = new ResourceLocation("maidspell", "spell_combat");
+    public static final ResourceLocation UID = ResourceLocation.fromNamespaceAndPath("maidspell", "spell_combat");
     private static final MutableComponent NAME = Component.translatable("task.maidspell.spell_combat");
     private static float SPELL_RANGE;
 

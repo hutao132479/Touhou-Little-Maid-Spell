@@ -3,11 +3,12 @@ package com.github.yimeng261.maidspell.spell.data;
 import com.github.yimeng261.maidspell.api.AbstractSpellData;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.spells.SpellData;
+import io.redspace.ironsspellbooks.api.spells.SpellSlot;
+
 import com.github.tartaricacid.touhoulittlemaid.entity.passive.EntityMaid;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -26,7 +27,7 @@ public class MaidIronsSpellData extends AbstractSpellData {
     private ItemStack staff = ItemStack.EMPTY;
     
     // === 施法状态 ===
-    private SpellData currentCastingSpell = null;
+    private SpellSlot currentCastingSpell = null;
     private final MagicData magicData;
 
     // === 构造函数 ===
@@ -81,11 +82,11 @@ public class MaidIronsSpellData extends AbstractSpellData {
     
     // === 施法状态管理 ===
     
-    public SpellData getCurrentCastingSpell() {
+    public SpellSlot getCurrentCastingSpell() {
         return currentCastingSpell;
     }
     
-    public void setCurrentCastingSpell(SpellData spell) {
+    public void setCurrentCastingSpell(SpellSlot spell) {
         this.currentCastingSpell = spell;
     }
     
@@ -108,8 +109,18 @@ public class MaidIronsSpellData extends AbstractSpellData {
     /**
      * 获取所有法术容器
      */
-    public ItemStack[] getAllSpellContainers() {
-        return new ItemStack[]{spellBook, magicSword, staff};
+    public ArrayList<ItemStack> getAllSpellContainers() {
+        ArrayList<ItemStack> containers = new ArrayList<>();
+        if(spellBook!=null){
+            containers.add(spellBook);
+        }
+        if(staff!=null){
+            containers.add(staff);
+        }
+        if(magicSword!=null){
+            containers.add(magicSword);
+        }
+        return containers;
     }
     
     /**
