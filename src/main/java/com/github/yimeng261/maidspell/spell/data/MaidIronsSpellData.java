@@ -7,6 +7,7 @@ import com.github.tartaricacid.touhoulittlemaid.entity.passive.EntityMaid;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -24,6 +25,7 @@ public class MaidIronsSpellData extends AbstractSpellData {
     // === 基本状态 ===
     private ItemStack magicSword = ItemStack.EMPTY;
     private ItemStack staff = ItemStack.EMPTY;
+    private LivingEntity origin_target = null;
     
     // === 施法状态 ===
     private SpellData currentCastingSpell = null;
@@ -62,6 +64,16 @@ public class MaidIronsSpellData extends AbstractSpellData {
         MAID_DATA_MAP.remove(maidUuid);
     }
 
+    public void switchTargetToOwner(EntityMaid maid) {
+        origin_target = target;
+        target = maid.getOwner();
+    }
+
+    public void switchTargetToOrigin(EntityMaid maid) {
+        target = origin_target;
+    }
+
+    public LivingEntity getOriginTarget() {return origin_target;}
     
     public ItemStack getMagicSword() {
         return magicSword;
@@ -108,8 +120,18 @@ public class MaidIronsSpellData extends AbstractSpellData {
     /**
      * 获取所有法术容器
      */
-    public ItemStack[] getAllSpellContainers() {
-        return new ItemStack[]{spellBook, magicSword, staff};
+    public ArrayList<ItemStack> getAllSpellContainers() {
+        ArrayList<ItemStack> containers = new ArrayList<>();
+        if(spellBook!=null){
+            containers.add(spellBook);
+        }
+        if(staff!=null){
+            containers.add(staff);
+        }
+        if(magicSword!=null){
+            containers.add(magicSword);
+        }
+        return containers;
     }
     
     /**

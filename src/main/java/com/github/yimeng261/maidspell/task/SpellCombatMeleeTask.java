@@ -7,12 +7,16 @@ import com.github.tartaricacid.touhoulittlemaid.entity.ai.brain.task.MaidRangedW
 import com.github.tartaricacid.touhoulittlemaid.entity.passive.EntityMaid;
 import com.github.tartaricacid.touhoulittlemaid.init.InitSounds;
 import com.github.tartaricacid.touhoulittlemaid.util.SoundUtil;
+import com.github.yimeng261.maidspell.spell.data.MaidIronsSpellData;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.behavior.*;
@@ -22,6 +26,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.phys.AABB;
+import net.minecraftforge.fml.ModList;
 import org.slf4j.Logger;
 import com.mojang.logging.LogUtils;
 
@@ -82,21 +87,21 @@ public class SpellCombatMeleeTask implements IRangedAttackTask {
         // 使用近战索敌方法 - 它已经内置了优先攻击最近目标的逻辑
         BehaviorControl<EntityMaid> supplementedTask = StartAttacking.create(this::hasSpellBook, IAttackTask::findFirstValidAttackTarget);
         BehaviorControl<EntityMaid> findTargetTask = StopAttackingIfTargetInvalid.create(target -> farAway(target, maid));
-        BehaviorControl<EntityMaid> moveToTargetTask = MaidRangedWalkToTarget.create(0.45f); // 进一步降低移动速度避免冲突
-        // 统一的法术战斗行为 - 负责管理SimplifiedSpellCaster
+        BehaviorControl<EntityMaid> moveToTargetTask = MaidRangedWalkToTarget.create(0.6f);
         BehaviorControl<EntityMaid> spellCastingTask = new UnifiedSpellCombatBehavior();
+        BehaviorControl<EntityMaid> strafingTask = new SpellStrafingTask();
 
         return Lists.newArrayList(
                 Pair.of(5, supplementedTask),
                 Pair.of(5, findTargetTask),
-                Pair.of(6, moveToTargetTask), // 降低优先级避免冲突
-                Pair.of(4, spellCastingTask) // 降低优先级，让移动任务先执行
+                Pair.of(5, moveToTargetTask),
+                Pair.of(5, spellCastingTask),
+                Pair.of(5, strafingTask)
         );
     }
 
     @Override
     public void performRangedAttack(EntityMaid shooter, LivingEntity target, float distanceFactor) {
-        // 空实现，实际攻击由UnifiedSpellCombatBehavior处理
     }
 
 
@@ -140,14 +145,14 @@ public class SpellCombatMeleeTask implements IRangedAttackTask {
     /**
      * 检查女仆是否装备了法术书（检查副手、主手和背包）
      */
-    private boolean hasSpellBook(EntityMaid maid) {
+    boolean hasSpellBook(EntityMaid maid) {
         return true;
     }
 
     /**
      * 检查目标是否距离过远
      */
-    private boolean farAway(LivingEntity target, EntityMaid maid) {
+    boolean farAway(LivingEntity target, EntityMaid maid) {
         return maid.distanceTo(target) > this.searchRadius(maid);
     }
 
@@ -156,7 +161,7 @@ public class SpellCombatMeleeTask implements IRangedAttackTask {
      * 统一的法术战斗行为控制器
      * 负责管理SimplifiedSpellCaster，并确保目标同步
      */
-    private class UnifiedSpellCombatBehavior extends Behavior<EntityMaid> {
+    class UnifiedSpellCombatBehavior extends Behavior<EntityMaid> {
         private SimplifiedSpellCaster currentSpellCaster;
 
         public UnifiedSpellCombatBehavior() {
@@ -187,19 +192,18 @@ public class SpellCombatMeleeTask implements IRangedAttackTask {
             // 创建SpellCaster并设置初始目标
             currentSpellCaster = new SimplifiedSpellCaster(maid);
 
-            // 立即设置当前目标
             LivingEntity target = maid.getBrain().getMemory(MemoryModuleType.ATTACK_TARGET).orElse(null);
+            if(target == maid.getOwner() && ModList.get().isLoaded("irons_spellbooks")){
+                target = MaidIronsSpellData.getOrCreate(maid).getOriginTarget();
+            }
             if (validateTarget(target)) {
                 currentSpellCaster.setTarget(target);
             }
 
         }
 
-        private boolean validateTarget(LivingEntity target) {
-            if(target!=null&&!(target instanceof Player)&&!(target instanceof EntityMaid)){
-                return true;
-            }
-            return false;
+        boolean validateTarget(LivingEntity target) {
+            return target != null && !(target instanceof Player) && !(target instanceof EntityMaid);
         }
 
         @Override
@@ -220,6 +224,100 @@ public class SpellCombatMeleeTask implements IRangedAttackTask {
             if (currentSpellCaster != null) {
                 currentSpellCaster = null;
             }
+        }
+    }
+
+    class SpellStrafingTask extends Behavior<EntityMaid> {
+        private boolean strafingClockwise;
+        private boolean strafingBackwards;
+        private int strafingTime = -1;
+        private double optimalMinDistance = SimplifiedSpellCaster.MELEE_RANGE - 1; // 最佳最小距离
+        private double maxAttackDistance = SPELL_RANGE;
+        private double rangeRange = 2;
+
+        public SpellStrafingTask() {
+            super(ImmutableMap.of(MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_ABSENT,
+                            MemoryModuleType.LOOK_TARGET, MemoryStatus.REGISTERED,
+                            MemoryModuleType.ATTACK_TARGET, MemoryStatus.VALUE_PRESENT,
+                            MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES, MemoryStatus.VALUE_PRESENT),
+                    1200);
+        }
+
+        @Override
+        protected boolean checkExtraStartConditions(ServerLevel worldIn, EntityMaid owner) {
+            // 修正：检查是否有法术书而不是投射武器
+            SpellCombatFarTask task = new SpellCombatFarTask();
+            return task.hasSpellBook(owner) &&
+                    owner.getBrain().getMemory(MemoryModuleType.ATTACK_TARGET)
+                            .filter(Entity::isAlive)
+                            .isPresent();
+        }
+
+        @Override
+        protected void tick(ServerLevel worldIn, EntityMaid owner, long gameTime) {
+            // 修正：检查法术书而不是投射武器
+            SpellCombatMeleeTask task = new SpellCombatMeleeTask();
+            if (!task.hasSpellBook(owner)) {
+                return;
+            }
+
+            owner.getBrain().getMemory(MemoryModuleType.ATTACK_TARGET).ifPresent((target) -> {
+                double distance = owner.distanceTo(target);
+                double optimalMaxDistance = optimalMinDistance + rangeRange; // 最佳最大距离
+
+                // 如果在攻击距离内且能看到目标，开始计时
+                if (distance < maxAttackDistance && owner.canSee(target)) {
+                    ++this.strafingTime;
+                } else {
+                    this.strafingTime = -1;
+                }
+
+                // 随机改变走位方向，增加不可预测性
+                if (this.strafingTime >= 20) {
+                    if (owner.getRandom().nextFloat() < 0.3) {
+                        this.strafingClockwise = !this.strafingClockwise;
+                    }
+                    if (owner.getRandom().nextFloat() < 0.3) {
+                        this.strafingBackwards = !this.strafingBackwards;
+                    }
+                    this.strafingTime = 0;
+                }
+
+                // 执行走位逻辑
+                if (this.strafingTime > -1) {
+                    if (distance > optimalMaxDistance) {
+                        this.strafingBackwards = false;
+                    } else if (distance < optimalMinDistance) {
+                        this.strafingBackwards = true;
+                    }
+
+                    float forwardSpeed = this.strafingBackwards ? -0.7F : 0.7F;
+                    float strafeSpeed = this.strafingClockwise ? 0.7F : -0.7F;
+
+                    owner.getMoveControl().strafe(forwardSpeed, strafeSpeed);
+                    owner.setYRot(Mth.rotateIfNecessary(owner.getYRot(), owner.yHeadRot, 0.0F));
+                    BehaviorUtils.lookAtEntity(owner, target);
+
+                } else {
+                    BehaviorUtils.lookAtEntity(owner, target);
+                }
+            });
+        }
+
+        @Override
+        protected void start(ServerLevel worldIn, EntityMaid entityIn, long gameTimeIn) {
+            entityIn.setSwingingArms(true);
+        }
+
+        @Override
+        protected void stop(ServerLevel worldIn, EntityMaid entityIn, long gameTimeIn) {
+            entityIn.setSwingingArms(false);
+            entityIn.getMoveControl().strafe(0, 0);
+        }
+
+        @Override
+        protected boolean canStillUse(ServerLevel worldIn, EntityMaid entityIn, long gameTimeIn) {
+            return this.checkExtraStartConditions(worldIn, entityIn);
         }
     }
 } 

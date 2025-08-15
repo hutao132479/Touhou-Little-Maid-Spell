@@ -112,7 +112,7 @@ public class PsiProvider implements ISpellBookProvider {
         }
 
         ItemStack cad = data.getSpellBook();
-        if (cad.isEmpty() || !(cad.getItem() instanceof ICAD)) {
+        if (!isSpellBook(cad)) {
             return false;
         }
 

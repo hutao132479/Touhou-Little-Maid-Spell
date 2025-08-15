@@ -28,7 +28,7 @@ public class SpringRing extends Item {
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
         super.appendHoverText(stack, level, tooltip, flag);
 
-        tooltip.add(Component.translatable("item.maidspell.spring_rings.desc1")
+        tooltip.add(Component.translatable("item.maidspell.spring_ring.desc1")
                 .withStyle(ChatFormatting.GRAY));
         tooltip.add(Component.translatable("item.maidspell.spring_ring.desc2")
                 .withStyle(ChatFormatting.BLUE));

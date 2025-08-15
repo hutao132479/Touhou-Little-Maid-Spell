@@ -101,10 +101,6 @@ public class SimplifiedSpellCaster {
         }
         target.invulnerableTime = 0;
 
-        if(distance > MELEE_RANGE) {
-            maid.getNavigation().moveTo(target, MOVEMENT_SPEED);
-        }
-
         // 执行法术施放
         if (spellBookManager != null) {
             spellBookManager.castSpell(maid);
@@ -114,7 +110,7 @@ public class SimplifiedSpellCaster {
             return;
         }
 
-        if (distance <= MELEE_RANGE) {
+        if (distance <= MELEE_RANGE+1) {
             maid.doHurtTarget(target);
             maid.swing(InteractionHand.MAIN_HAND);
         }

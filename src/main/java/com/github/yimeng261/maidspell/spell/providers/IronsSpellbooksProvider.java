@@ -2,8 +2,12 @@ package com.github.yimeng261.maidspell.spell.providers;
 
 import com.github.tartaricacid.touhoulittlemaid.entity.passive.EntityMaid;
 import com.github.yimeng261.maidspell.api.ISpellBookProvider;
+import com.github.yimeng261.maidspell.item.MaidSpellItems;
+import com.github.yimeng261.maidspell.item.bauble.blueNote.BlueNote;
+import com.github.yimeng261.maidspell.item.bauble.blueNote.contianer.BlueNoteSpellManager;
 import com.github.yimeng261.maidspell.spell.data.MaidIronsSpellData;
 
+import com.github.yimeng261.maidspell.spell.manager.BaubleStateManager;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.api.spells.SpellData;
@@ -19,6 +23,7 @@ import io.redspace.ironsspellbooks.item.weapons.StaffItem;
 import io.redspace.ironsspellbooks.api.item.weapons.MagicSwordItem;
 import io.redspace.ironsspellbooks.spells.TargetAreaCastData;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.behavior.BehaviorUtils;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 
@@ -162,17 +167,15 @@ public class IronsSpellbooksProvider implements ISpellBookProvider {
             return false;
         }
 
-        
-
         // 尝试施放可用的法术
         List<SpellData> availableSpells = new ArrayList<>();
-        for(ItemStack container : data.getAllSpellContainers()){
+        data.getAllSpellContainers().forEach(container -> {
             ISpellContainer spellContainer = ISpellContainer.get(container);
             if(!spellContainer.isEmpty()){
                 availableSpells.addAll(Arrays.asList(spellContainer.getAllSpells()));
             }
-        }
-        
+        });
+
         availableSpells.removeIf(spellData -> spellData == null || data.isSpellOnCooldown(spellData.getSpell().getSpellId()));
 
         if (availableSpells.isEmpty()) {
@@ -182,11 +185,22 @@ public class IronsSpellbooksProvider implements ISpellBookProvider {
         // 随机选择一个可用的法术
         int index = (int) (Math.random() * availableSpells.size());
         SpellData spellData = availableSpells.get(index);
-        if (!data.isSpellOnCooldown(spellData.getSpell().getSpellId())) {
-            return initiateCasting(maid, spellData);
-        }
+        BaubleStateManager.getBaubles(maid).forEach(bauble -> {
+            if(!bauble.getDescriptionId().equals(MaidSpellItems.itemDesc(MaidSpellItems.BLUE_NOTE))){
+                return;
+            }
+            LOGGER.debug("storedSpells:");
+            BlueNoteSpellManager.getStoredSpellIds(bauble).forEach(LOGGER::debug);
+            if(BlueNoteSpellManager.getStoredSpellIds(bauble).contains(spellData.getSpell().getSpellId())){
+                LOGGER.debug("should cast to owner : {}",spellData.getSpell().getSpellId());
+                data.switchTargetToOwner(maid);
+            }else{
+                data.switchTargetToOrigin(maid);
+            }
+        });
 
-        return false;
+        return initiateCasting(maid, spellData);
+
     }
     
     /**
@@ -207,9 +221,7 @@ public class IronsSpellbooksProvider implements ISpellBookProvider {
             // 确保女仆面向目标（特别是对于投射法术）
             LivingEntity target = data.getTarget();
             if (target != null) {
-                maid.getLookControl().setLookAt(target.getX(), target.getEyeY(), target.getZ());
-                // 强制更新朝向
-                forceLookAtTarget(maid, target);
+                BehaviorUtils.lookAtEntity(maid, target);
             }
             
             // 设置目标相关的施法数据（在checkPreCastConditions之前）
@@ -259,9 +271,7 @@ public class IronsSpellbooksProvider implements ISpellBookProvider {
         // 持续更新女仆朝向目标（重要：确保持续性法术始终面向目标）
         LivingEntity target = data.getTarget();
         if (target != null) {
-            maid.getLookControl().setLookAt(target.getX(), target.getEyeY(), target.getZ());
-            // 强制立即更新朝向，确保AbstractConeProjectile能够获取到正确的朝向
-            forceLookAtTarget(maid, target);
+            BehaviorUtils.lookAtEntity(maid, target);
         }
         
         // 更新施法持续时间
@@ -395,34 +405,6 @@ public class IronsSpellbooksProvider implements ISpellBookProvider {
         
         // 重置施法状态
         data.resetCastingState();
-    }
-    
-    /**
-     * 强制女仆立即面向目标
-     */
-    private void forceLookAtTarget(EntityMaid maid, LivingEntity target) {
-        if (target == null || maid == null) return;
-        
-        double dx = target.getX() - maid.getX();
-        double dy = target.getEyeY() - maid.getEyeY();
-        double dz = target.getZ() - maid.getZ();
-        
-        double horizontalDistance = Math.sqrt(dx * dx + dz * dz);
-        
-        // 计算Yaw（水平旋转）
-        float yaw = (float) (Math.atan2(dz, dx) * 180.0 / Math.PI) - 90.0f;
-        
-        // 计算Pitch（垂直旋转）
-        float pitch = (float) (-(Math.atan2(dy, horizontalDistance) * 180.0 / Math.PI));
-        
-        // 设置女仆的朝向
-        maid.setYRot(yaw);
-        maid.setXRot(pitch);
-        maid.yRotO = yaw;
-        maid.xRotO = pitch;
-        maid.yHeadRot = yaw;
-        maid.yHeadRotO = yaw;
-        
     }
     
     /**
